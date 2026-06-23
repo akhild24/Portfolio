@@ -172,7 +172,7 @@ export default function Preloader({ onComplete }) {
   useEffect(() => {
     let p = 0;
     const iv = setInterval(() => {
-      p += Math.random() * 2.5 + 0.5;
+      p += Math.random() * 2.5 + 5;
       if (p >= 100) {
         p = 100;
         clearInterval(iv);

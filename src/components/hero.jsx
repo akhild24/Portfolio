@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useAnimation, AnimatePresence } from "framer-motion";
-
+import Akhil from "../assets/me.png"
 // ─── animation config ────────────────────────────────────────────────────────
 
 const STAGGER = 0.08;
@@ -206,10 +206,10 @@ export default function Hero() {
           className="w-full bg-[#1a1f2a] border border-[#eeebe4]/10"
           style={{ aspectRatio: "3/4" }}
         >
-          {/* 
-            Replace this div with:
-            <img src="/your-photo.jpg" alt="Akhil Dixit" className="w-full h-full object-cover grayscale" />
-          */}
+          { 
+            
+            <img src={Akhil} alt="Akhil Dwivedi" className="w-full h-full object-cover grayscale" />
+          }
           <div className="w-full h-full flex items-end p-4">
             <span className="font-mono text-[9px] tracking-[0.18em] text-[#eeebe4]/20">
               PHOTO.JPG
