@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react";
-import { motion, useAnimation, AnimatePresence } from "framer-motion";
-import Akhil from "../assets/me.png"
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import Akhil from "../assets/me.png";
+
 // ─── animation config ────────────────────────────────────────────────────────
 
 const STAGGER = 0.08;
@@ -55,7 +56,7 @@ const SLASH_LIST = [
   "/ OBSERVABILITY PIPELINES",
 ];
 
-// ─── annotations ──────────────────────────────────────────────────────────────
+// ─── annotations ─────────────────────────────────────────────────────────────
 
 const BASED_IN   = "BASED IN INDORE, MP";
 const RECENT_TAG = "RECENT ROLE";
@@ -155,7 +156,7 @@ export default function Hero() {
             custom={1}
             className="font-sans font-black text-[#eeebe4] leading-none tracking-[-0.03em] whitespace-nowrap"
             style={{
-              fontSize: "clamp(72px, 16vw, 220px)",
+              fontSize: "clamp(64px, 13vw, 195px)",
               WebkitTextFillColor: "#eeebe4",
             }}
           >
@@ -167,7 +168,7 @@ export default function Hero() {
       {/* Line 2 */}
       <div
         className="absolute left-0 right-0 overflow-hidden z-10 px-6 md:px-8"
-        style={{ top: "calc(14% + clamp(70px, 15.2vw, 210px))" }}
+        style={{ top: "calc(14% + clamp(62px, 12.4vw, 188px))" }}
       >
         <div className="overflow-hidden">
           <motion.h1
@@ -177,9 +178,9 @@ export default function Hero() {
             custom={1.4}
             className="font-sans font-black leading-none tracking-[-0.03em] whitespace-nowrap"
             style={{
-              fontSize: "clamp(72px, 16vw, 220px)",
+              fontSize: "clamp(64px, 13vw, 195px)",
               WebkitTextFillColor: "transparent",
-              WebkitTextStroke: "1.5px rgba(238,235,228,0.25)",
+              WebkitTextStroke: "2px rgba(238,235,228,0.6)",
             }}
           >
             ENGINEER
@@ -188,33 +189,27 @@ export default function Hero() {
       </div>
 
       {/* ── photo block ──────────────────────────────────────────── */}
-      {/* Positioned to overlap both headline lines, same as reference */}
       <motion.div
         variants={photoReveal}
         initial="hidden"
         animate="visible"
         className="absolute z-20"
         style={{
-          top: "clamp(90px, 17vw, 230px)",
-          left: "50%",
-          transform: "translateX(-15%)",
-          width: "clamp(180px, 22vw, 300px)",
+          top: "clamp(80px, 12vw, 160px)",
+          right: "clamp(40px, 8vw, 140px)",
+          width: "clamp(200px, 20vw, 280px)",
         }}
       >
-        {/* Photo placeholder — swap src with your actual image */}
+        {/* photo — grayscale, fills the frame */}
         <div
-          className="w-full bg-[#1a1f2a] border border-[#eeebe4]/10"
+          className="w-full bg-[#1a1f2a] border border-[#eeebe4]/10 overflow-hidden"
           style={{ aspectRatio: "3/4" }}
         >
-          { 
-            
-            <img src={Akhil} alt="Akhil Dwivedi" className="w-full h-full object-cover grayscale" />
-          }
-          <div className="w-full h-full flex items-end p-4">
-            <span className="font-mono text-[9px] tracking-[0.18em] text-[#eeebe4]/20">
-              PHOTO.JPG
-            </span>
-          </div>
+          <img
+            src={Akhil}
+            alt="Akhil Dwivedi"
+            className="w-full h-full object-cover grayscale"
+          />
         </div>
 
         {/* slash list — sits below photo, left-anchored */}
@@ -241,11 +236,11 @@ export default function Hero() {
         initial="hidden"
         animate="visible"
         custom={2.8}
-        className="absolute z-10 font-mono text-[#eeebe4]/35 tracking-[0.22em]"
+        className="absolute z-30 font-mono text-[#eeebe4]/35 tracking-[0.22em]"
         style={{
           fontSize: "10px",
-          top: "clamp(90px, 17.5vw, 235px)",
-          right: "8%",
+          top: "clamp(54px, 8vw, 112px)",
+          right: "clamp(40px, 8vw, 140px)",
         }}
       >
         {BASED_IN}
