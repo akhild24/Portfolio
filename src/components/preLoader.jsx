@@ -171,7 +171,7 @@ export default function Preloader({ onComplete }) {
     };
   }, []);
 
-  // ── Percent counter (your version) ─────────────────────────────────────────
+  // ── Percent counter ────────────────────────────────────────────────────────
   useEffect(() => {
     let p = 0;
     const iv = setInterval(() => {
@@ -217,12 +217,12 @@ const styles = {
     position:       "fixed",
     inset:          0,
     zIndex:         9999,
-    background:     "#f5f5f3",
+    background:     "var(--color-light)",
     display:        "flex",
     flexDirection:  "column",
     alignItems:     "center",
     justifyContent: "center",
-    fontFamily:     "'JetBrains Mono', monospace",
+    fontFamily:     "var(--font-mono)",
   },
   canvas: {
     width:  "780px",
@@ -238,14 +238,14 @@ const styles = {
   pct: {
     fontSize:      "22px",
     fontWeight:    "700",
-    color:         "#111",
+    color:         "var(--color-ink)",
     letterSpacing: "0.05em",
-    fontFamily:    "'JetBrains Mono', monospace",
+    fontFamily:    "var(--font-mono)",
   },
   barTrack: {
     width:      "160px",
     height:     "1px",
-    background: "#ccc",
+    background: "var(--color-track)",
     position:   "relative",
     overflow:   "hidden",
   },
@@ -254,7 +254,7 @@ const styles = {
     top:        0,
     left:       0,
     height:     "100%",
-    background: "#111",
+    background: "var(--color-ink)",
     transition: "width 0.1s linear",
   },
 };

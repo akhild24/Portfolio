@@ -79,7 +79,7 @@ function UptimeTicker() {
   const s = String(elapsed % 60).padStart(2, "0");
 
   return (
-    <span className="font-mono text-[10px] tracking-[0.18em] text-[#eeebe4]/40">
+    <span className="font-mono text-[10px] tracking-[0.18em] text-cream/40">
       {h}:{m}:{s}
     </span>
   );
@@ -90,8 +90,7 @@ function UptimeTicker() {
 export default function Hero() {
   return (
     <section
-      className="relative w-full min-h-screen overflow-hidden select-none"
-      style={{ background: "#0d1117" }}
+      className="relative w-full min-h-screen overflow-hidden select-none bg-dark"
     >
       {/* ── nav ─────────────────────────────────────────────────── */}
       <nav className="absolute top-0 left-0 right-0 z-30 flex items-center justify-between px-8 pt-8">
@@ -101,7 +100,7 @@ export default function Hero() {
           initial="hidden"
           animate="visible"
           custom={0}
-          className="font-mono text-[11px] tracking-[0.14em] text-[#eeebe4] leading-tight"
+          className="font-mono text-[11px] tracking-[0.14em] text-cream leading-tight"
         >
           <div>AKHIL</div>
           <div>DWIVEDI</div>
@@ -119,7 +118,7 @@ export default function Hero() {
             >
               <a
                 href={`#${link.toLowerCase()}`}
-                className="font-mono text-[10px] tracking-[0.2em] text-[#eeebe4]/50 hover:text-[#eeebe4] transition-colors duration-300"
+                className="font-mono text-[10px] tracking-[0.2em] text-cream/50 hover:text-cream transition-colors duration-300"
               >
                 [ {link} ]
               </a>
@@ -138,7 +137,7 @@ export default function Hero() {
           <UptimeTicker />
           <a
             href="mailto:akhil@akd.dev"
-            className="font-mono text-[10px] tracking-[0.16em] text-[#eeebe4] border-b border-[#eeebe4]/30 pb-px hover:border-[#eeebe4] transition-colors duration-300"
+            className="font-mono text-[10px] tracking-[0.16em] text-cream border-b border-cream/30 pb-px hover:border-cream transition-colors duration-300"
           >
             CONTACT ↗
           </a>
@@ -154,10 +153,9 @@ export default function Hero() {
             initial="hidden"
             animate="visible"
             custom={1}
-            className="font-sans font-black text-[#eeebe4] leading-none tracking-[-0.03em] whitespace-nowrap"
+            className="font-sans font-black text-cream leading-none tracking-[-0.03em] whitespace-nowrap"
             style={{
               fontSize: "clamp(64px, 13vw, 195px)",
-              WebkitTextFillColor: "#eeebe4",
             }}
           >
             DEVOPS
@@ -180,7 +178,7 @@ export default function Hero() {
             style={{
               fontSize: "clamp(64px, 13vw, 195px)",
               WebkitTextFillColor: "transparent",
-              WebkitTextStroke: "2px rgba(238,235,228,0.6)",
+              WebkitTextStroke: "2px color-mix(in srgb, var(--color-cream) 60%, transparent)",
             }}
           >
             ENGINEER
@@ -202,7 +200,7 @@ export default function Hero() {
       >
         {/* photo — grayscale, fills the frame */}
         <div
-          className="w-full bg-[#1a1f2a] border border-[#eeebe4]/10 overflow-hidden"
+          className="w-full bg-surface border border-cream/10 overflow-hidden"
           style={{ aspectRatio: "3/4" }}
         >
           <img
@@ -221,7 +219,7 @@ export default function Hero() {
               initial="hidden"
               animate="visible"
               custom={2.2 + i * 0.3}
-              className="font-sans font-bold text-[#eeebe4] leading-none"
+              className="font-sans font-bold text-cream leading-none"
               style={{ fontSize: "clamp(10px, 1.1vw, 14px)", letterSpacing: "0.04em" }}
             >
               {line}
@@ -236,7 +234,7 @@ export default function Hero() {
         initial="hidden"
         animate="visible"
         custom={2.8}
-        className="absolute z-30 font-mono text-[#eeebe4]/35 tracking-[0.22em]"
+        className="absolute z-30 font-mono text-cream/35 tracking-[0.22em]"
         style={{
           fontSize: "10px",
           top: "clamp(54px, 8vw, 112px)",
@@ -254,12 +252,12 @@ export default function Hero() {
         custom={3.2}
         className="absolute bottom-10 left-8 z-20 flex flex-col gap-[6px]"
       >
-        <p className="font-mono text-[10px] tracking-[0.18em] text-[#eeebe4]/40">
+        <p className="font-mono text-[10px] tracking-[0.18em] text-cream/40">
           {AVAIL_TAG}
         </p>
         <a
           href="mailto:akhil@akd.dev"
-          className="font-mono text-[13px] tracking-[0.06em] text-[#eeebe4] hover:text-[#eeebe4]/60 transition-colors duration-300"
+          className="font-mono text-[13px] tracking-[0.06em] text-cream hover:text-cream/60 transition-colors duration-300"
         >
           {AVAIL_VAL}
         </a>
@@ -273,10 +271,10 @@ export default function Hero() {
         custom={3.4}
         className="absolute bottom-10 right-8 z-20 flex flex-col gap-[6px] text-right"
       >
-        <p className="font-mono text-[10px] tracking-[0.18em] text-[#eeebe4]/40">
+        <p className="font-mono text-[10px] tracking-[0.18em] text-cream/40">
           {RECENT_TAG}  ↘
         </p>
-        <p className="font-mono text-[12px] tracking-[0.04em] text-[#eeebe4] font-bold">
+        <p className="font-mono text-[12px] tracking-[0.04em] text-cream font-bold">
           {RECENT_VAL}
         </p>
       </motion.div>
@@ -287,8 +285,7 @@ export default function Hero() {
         initial="hidden"
         animate="visible"
         custom={3.6}
-        className="absolute bottom-0 left-0 right-0 h-px z-10"
-        style={{ background: "rgba(238,235,228,0.07)" }}
+        className="absolute bottom-0 left-0 right-0 h-px z-10 bg-cream/7"
       />
     </section>
   );
