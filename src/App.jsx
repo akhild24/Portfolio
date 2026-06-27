@@ -3,6 +3,7 @@ import { AnimatePresence } from "framer-motion";
 import Preloader from "./components/preLoader";
 import Hero, { Navbar } from "./components/hero";
 import About from "./components/about";
+import Work from "./components/Work";
 
 
 
@@ -22,6 +23,7 @@ export default function App() {
           <Navbar />
           <Hero />
           <About />
+          <Work />
 
         </>
       )}

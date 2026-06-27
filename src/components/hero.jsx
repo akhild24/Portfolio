@@ -46,7 +46,7 @@ const photoReveal = {
 
 // ─── nav links ────────────────────────────────────────────────────────────────
 
-const NAV_LINKS = ["ABOUT", "WORK", "SKILLS", "CONTACT"];
+const NAV_LINKS = ["ABOUT", "WORK", "PROJECTS & SKILLS", "CONTACT"];
 
 // ─── slash list (real resume lines) ──────────────────────────────────────────
 
@@ -101,7 +101,7 @@ function SignalDot() {
 
 export function Navbar() {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-10 py-5 bg-void/80 backdrop-blur-md border-b border-bone/5 transition-all duration-300">
+    <nav className="fixed top-0 left-2 right-2 z-50 flex items-center justify-between px-10 py-5 bg-void/80 backdrop-blur-md border-b border-bone/5 transition-all duration-300">
       {/* wordmark */}
       <motion.div
         variants={fadeIn}

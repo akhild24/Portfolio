@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import Akhil from "../assets/me.png";
+import CircuitBoard from "./CircuitBoard";
 
 function useInView(threshold = 0.05) {
   const ref = useRef(null);
@@ -212,7 +213,7 @@ function ManifestoPanel() {
   );
 }
 
-// ─── PANEL 3 — Photo wipe + bio (void canvas) ─────────────────────────────
+// ─── PANEL 3 — Photo wipe + bio + circuit board (void canvas) ──────────────
 function BioPanel() {
   const panelRef = useRef(null);
   const [entered, setEntered] = useState(false);
@@ -294,91 +295,117 @@ function BioPanel() {
         3/3
       </motion.div>
 
-      {/* content column */}
-      <div style={{ marginLeft: "clamp(120px, 30vw, 480px)", paddingTop: 80 }}>
+      {/* ── two-column layout ─────────────────────────────────────── */}
+      <div style={{
+        display: "flex",
+        alignItems: "flex-start",
+        gap: "clamp(40px, 5vw, 80px)",
+        paddingTop: 80,
+        paddingLeft: "clamp(36px, 6vw, 120px)",
+        paddingRight: "clamp(36px, 6vw, 120px)",
+        boxSizing: "border-box",
+        flexWrap: "wrap",
+      }}>
+        {/* ── LEFT COLUMN — photo + name + experience ─────────────── */}
+        <div style={{ flex: "0 0 auto" }}>
+          {/* PHOTO — wipe clip driven by scroll */}
+          <div style={{ width: 280, height: 300, position: "relative", overflow: "visible" }}>
+            <motion.div
+              style={{
+                width: 280,
+                height: 300,
+                clipPath: photoClip,
+                y: photoY,
+                willChange: "clip-path, transform",
+              }}
+            >
+              <img
+                src={Akhil}
+                alt="Akhil Dwivedi"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  objectPosition: "top center",
+                  display: "block",
+                  filter: "grayscale(1)",
+                }}
+              />
+            </motion.div>
+          </div>
 
-        {/* PHOTO — wipe clip driven by scroll */}
-        <div style={{ width: 280, height: 300, position: "relative", overflow: "visible" }}>
+          {/* NAME — serif italic "hello" + sans caps name */}
           <motion.div
             style={{
+              marginTop: 28,
               width: 280,
-              height: 300,
-              clipPath: photoClip,
-              y: photoY,
-              willChange: "clip-path, transform",
+              textAlign: "center",
+              opacity: nameOpacity,
+              y: nameY,
             }}
           >
-            <img
-              src={Akhil}
-              alt="Akhil Dwivedi"
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                objectPosition: "top center",
-                display: "block",
-                filter: "grayscale(1)",
-              }}
-            />
+            <div style={{
+              fontFamily: SERIF, fontStyle: "italic", fontWeight: 400,
+              fontSize: "16px", letterSpacing: "-0.01em", color: ASH,
+              marginBottom: 6,
+            }}>
+              hello, I'm
+            </div>
+            <div style={{
+              fontFamily: SANS, fontWeight: 900,
+              fontSize: "18px", letterSpacing: "0.06em", color: BONE,
+              textTransform: "uppercase",
+            }}>
+              AKHIL DWIVEDI
+            </div>
+          </motion.div>
+
+          {/* MY EXPERIENCE + bio */}
+          <motion.div style={{ marginTop: 44, opacity: expOpacity, y: expY }}>
+            <div style={{
+              fontFamily: MONO, fontSize: "11px",
+              letterSpacing: "0.18em", color: DIM,
+              textTransform: "uppercase",
+              display: "flex", alignItems: "center", gap: 6,
+              marginBottom: 20,
+            }}>
+              MY EXPERIENCE <span style={{ fontSize: "12px" }}>↘</span>
+            </div>
+            <p style={{
+              fontFamily: MONO, fontSize: "12px", lineHeight: 2.0,
+              letterSpacing: "0.1em", color: ASH,
+              textTransform: "uppercase", margin: 0, maxWidth: 520,
+            }}>
+              A 4TH YEAR CSE STUDENT BUILDING PRODUCTION-GRADE
+              <br />
+              INFRA. PREVIOUSLY INTERN AT 47BILLION — FULL STACK
+              <br />
+              DEV · RAG · VAPT · AI · CLOUD MENTOR AT GDG ON CAMPUS,
+              <br />
+              PUSHING 40+ STUDENTS TOWARD GCP CERTIFICATION.
+              <br />
+              TOP 10 OF 275 TEAMS AT UDBHAV'26.
+              <br />
+              50+ VULNERABILITIES IDENTIFIED ON A LIVE PRODUCTION SYSTEM.
+            </p>
           </motion.div>
         </div>
 
-        {/* NAME — serif italic "hello" + sans caps name */}
+        {/* ── RIGHT COLUMN — circuit board pipeline ────────────────── */}
         <motion.div
           style={{
-            marginTop: 28,
-            width: 280,
-            textAlign: "center",
-            opacity: nameOpacity,
-            y: nameY,
+            flex: "1 1 400px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            minHeight: 400,
+            paddingTop: 40,
+            opacity: expOpacity,
+            y: expY,
           }}
         >
-          <div style={{
-            fontFamily: SERIF, fontStyle: "italic", fontWeight: 400,
-            fontSize: "16px", letterSpacing: "-0.01em", color: ASH,
-            marginBottom: 6,
-          }}>
-            hello, I'm
-          </div>
-          <div style={{
-            fontFamily: SANS, fontWeight: 900,
-            fontSize: "18px", letterSpacing: "0.06em", color: BONE,
-            textTransform: "uppercase",
-          }}>
-            AKHIL DWIVEDI
-          </div>
+          <CircuitBoard />
         </motion.div>
-
-        {/* MY EXPERIENCE + bio */}
-        <motion.div style={{ marginTop: 44, opacity: expOpacity, y: expY }}>
-          <div style={{
-            fontFamily: MONO, fontSize: "11px",
-            letterSpacing: "0.18em", color: DIM,
-            textTransform: "uppercase",
-            display: "flex", alignItems: "center", gap: 6,
-            marginBottom: 20,
-          }}>
-            MY EXPERIENCE <span style={{ fontSize: "12px" }}>↘</span>
-          </div>
-          <p style={{
-            fontFamily: MONO, fontSize: "12px", lineHeight: 2.0,
-            letterSpacing: "0.1em", color: ASH,
-            textTransform: "uppercase", margin: 0, maxWidth: 520,
-          }}>
-            A 4TH YEAR CSE STUDENT BUILDING PRODUCTION-GRADE
-            <br />
-            INFRA. PREVIOUSLY INTERN AT 47BILLION — FULL STACK
-            <br />
-            DEV · RAG · VAPT · AI · CLOUD MENTOR AT GDG ON CAMPUS,
-            <br />
-            PUSHING 40+ STUDENTS TOWARD GCP CERTIFICATION.
-            <br />
-            TOP 10 OF 275 TEAMS AT UDBHAV'26.
-            <br />
-            50+ VULNERABILITIES IDENTIFIED ON A LIVE PRODUCTION SYSTEM.
-          </p>
-        </motion.div>
-
       </div>
     </div>
   );
