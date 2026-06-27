@@ -103,7 +103,7 @@ export default function Preloader({ onComplete }) {
     ctx.clearRect(0, 0, loopPx, TEX_H);
     ctx.font         = `900 ${FONT_PX}px 'JetBrains Mono', monospace`;
     ctx.textBaseline = "middle";
-    ctx.fillStyle    = "#111111";
+    ctx.fillStyle    = "#080808";
     // Draw exactly one loop — RepeatWrapping handles the tiling
     ctx.fillText(loopStr, 0, TEX_H / 2);
 
@@ -217,7 +217,7 @@ const styles = {
     position:       "fixed",
     inset:          0,
     zIndex:         9999,
-    background:     "var(--color-light)",
+    background:     "var(--color-linen)",
     display:        "flex",
     flexDirection:  "column",
     alignItems:     "center",
@@ -245,7 +245,7 @@ const styles = {
   barTrack: {
     width:      "160px",
     height:     "1px",
-    background: "var(--color-track)",
+    background: "var(--color-ash)",
     position:   "relative",
     overflow:   "hidden",
   },

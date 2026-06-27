@@ -18,39 +18,29 @@ function useInView(threshold = 0.05) {
   return [ref, visible];
 }
 
-function FadeUp({ children, delay = 0, visible, style = {} }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={visible ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }}
-      style={style}
-    >
-      {children}
-    </motion.div>
-  );
-}
-
 /* ── Palette — all values reference CSS variables from index.css @theme ── */
-const BG    = "var(--color-dark)";
-const WHITE = "var(--color-cream)";
-const DIM   = "var(--color-dim)";
-const BODY  = "var(--color-body)";
-const DIV   = "var(--color-panel)";
-const DIMQ  = "var(--color-elevated)";
-const LIGHT = "var(--color-light)";
-const INK   = "var(--color-ink)";
-const MONO  = "var(--font-mono)";
-const SANS  = "var(--font-sans)";
+const VOID   = "var(--color-void)";
+const BONE   = "var(--color-bone)";
+const ASH    = "var(--color-ash)";
+const DIM    = "var(--color-dim)";
+const IRON   = "var(--color-iron)";
+const INK    = "var(--color-ink)";
+const LINEN  = "var(--color-linen)";
+const SMOKE  = "var(--color-smoke)";
+const PLATE  = "var(--color-plate)";
+const SIGNAL = "var(--color-signal)";
+const MONO   = "var(--font-mono)";
+const SANS   = "var(--font-sans)";
+const SERIF  = "var(--font-serif)";
 
-// ─── PANEL 1 ───────────────────────────────────────────────────────────────
+// ─── PANEL 1 — Title (linen inverted surface) ──────────────────────────────
 function TitlePanel() {
   const [ref, visible] = useInView(0.25);
   return (
     <div
       ref={ref}
       style={{
-        background: LIGHT,
+        background: LINEN,
         width: "100%",
         height: "70vh",
         display: "flex",
@@ -60,6 +50,7 @@ function TitlePanel() {
         overflow: "hidden",
       }}
     >
+      {/* section label */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={visible ? { opacity: 1 } : {}}
@@ -74,6 +65,21 @@ function TitlePanel() {
         ABOUT ME
       </motion.div>
 
+      {/* panel number */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={visible ? { opacity: 1 } : {}}
+        transition={{ duration: 0.35 }}
+        style={{
+          position: "absolute", top: 28, right: 36,
+          fontFamily: MONO, fontWeight: 700,
+          fontSize: "clamp(15px, 1.8vw, 22px)", color: INK,
+        }}
+      >
+        1/3
+      </motion.div>
+
+      {/* big title */}
       <div style={{ lineHeight: 0.9, textAlign: "center" }}>
         {["ABOUT", "ME"].map((word, i) => (
           <div key={word} style={{ overflow: "hidden" }}>
@@ -85,7 +91,7 @@ function TitlePanel() {
                 fontFamily: SANS, fontWeight: 900,
                 fontSize: "clamp(50px, 9vw, 100px)",
                 color: INK, textTransform: "uppercase",
-                letterSpacing: "-0.03em", display: "block",
+                letterSpacing: "-0.06em", display: "block",
               }}
             >
               {word}
@@ -94,25 +100,27 @@ function TitlePanel() {
         ))}
       </div>
 
+      {/* bottom hairline */}
       <motion.div
         initial={{ scaleX: 0 }}
         animate={visible ? { scaleX: 1 } : {}}
         transition={{ duration: 0.8, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
         style={{
           position: "absolute", bottom: 0, left: 0, right: 0,
-          height: "1px", background: DIV, transformOrigin: "left",
+          height: "1px", background: IRON, transformOrigin: "left",
         }}
       />
     </div>
   );
 }
 
-// ─── PANEL 2 ───────────────────────────────────────────────────────────────
+// ─── PANEL 2 — Manifesto (void canvas) ─────────────────────────────────────
 const LINES = [
   { t: "INFRASTRUCTURE",  bright: true  },
   { t: "IS NOT JUST",     bright: false },
   { t: "AUTOMATION,",     bright: true  },
-  { t: "BUT A TOOL FOR",  bright: false },
+  { t: "BUT",             bright: false, serif: true, serifWord: "a tool" },
+  { t: "FOR",             bright: false },
   { t: "SCALE",           bright: true  },
   { t: "AND RESILIENCE.", bright: false },
 ];
@@ -123,23 +131,40 @@ function ManifestoPanel() {
     <div
       ref={ref}
       style={{
-        background: BG, width: "100%", minHeight: "100vh",
+        background: VOID, width: "100%", minHeight: "100vh",
         display: "flex", flexDirection: "column", justifyContent: "center",
         padding: "80px 40px", boxSizing: "border-box", position: "relative",
       }}
     >
+      {/* panel number */}
       <motion.div initial={{ opacity: 0 }} animate={visible ? { opacity: 1 } : {}} transition={{ duration: 0.35 }}
-        style={{ position: "absolute", top: 36, left: 36, fontFamily: MONO, fontWeight: 700, fontSize: "clamp(15px, 1.8vw, 22px)", color: WHITE }}>
-        2/5
+        style={{ position: "absolute", top: 36, left: 36, fontFamily: MONO, fontWeight: 700, fontSize: "clamp(15px, 1.8vw, 22px)", color: BONE }}>
+        2/3
       </motion.div>
+
+      {/* center label */}
       <motion.div initial={{ opacity: 0 }} animate={visible ? { opacity: 1 } : {}} transition={{ duration: 0.35, delay: 0.05 }}
         style={{ position: "absolute", top: 40, left: "50%", transform: "translateX(-50%)", fontFamily: MONO, fontSize: "11px", letterSpacing: "0.18em", color: DIM, textTransform: "uppercase", whiteSpace: "nowrap" }}>
         FOR ME
       </motion.div>
+
+      {/* right label */}
       <motion.div initial={{ opacity: 0 }} animate={visible ? { opacity: 1 } : {}} transition={{ duration: 0.35, delay: 0.05 }}
         style={{ position: "absolute", top: 40, right: 36, fontFamily: MONO, fontSize: "11px", letterSpacing: "0.15em", color: DIM, textTransform: "uppercase" }}>
         DSGN/2
       </motion.div>
+
+      {/* signal accent dot — the only color punctuation */}
+      <motion.div
+        initial={{ scale: 0, opacity: 0 }}
+        animate={visible ? { scale: 1, opacity: 1 } : {}}
+        transition={{ duration: 0.5, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        style={{
+          position: "absolute", top: 38, left: 74,
+          width: 8, height: 8, borderRadius: "50%",
+          background: SIGNAL,
+        }}
+      />
 
       <div>
         {LINES.map((line, i) => (
@@ -149,14 +174,36 @@ function ManifestoPanel() {
               animate={visible ? { y: "0%" } : {}}
               transition={{ duration: 0.7, delay: 0.15 + i * 0.08, ease: [0.16, 1, 0.3, 1] }}
               style={{
-                fontFamily: SANS, fontWeight: 900,
-                fontSize: "clamp(38px, 6.5vw, 88px)",
-                letterSpacing: "-0.03em",
-                color: line.bright ? WHITE : DIMQ,
-                textTransform: "uppercase", display: "block", paddingBottom: "0.04em",
+                display: "flex",
+                alignItems: "baseline",
+                gap: "0.25em",
+                paddingBottom: "0.04em",
               }}
             >
-              {line.t}
+              <span
+                style={{
+                  fontFamily: SANS, fontWeight: 900,
+                  fontSize: "clamp(38px, 6.5vw, 88px)",
+                  letterSpacing: "-0.06em",
+                  color: line.bright ? BONE : SMOKE,
+                  textTransform: "uppercase",
+                }}
+              >
+                {line.t}
+              </span>
+              {/* serif italic connective after "BUT" */}
+              {line.serif && (
+                <span
+                  style={{
+                    fontFamily: SERIF, fontStyle: "italic", fontWeight: 400,
+                    fontSize: "clamp(22px, 3.2vw, 42px)",
+                    letterSpacing: "-0.02em",
+                    color: ASH,
+                  }}
+                >
+                  {line.serifWord}
+                </span>
+              )}
             </motion.div>
           </div>
         ))}
@@ -165,12 +212,7 @@ function ManifestoPanel() {
   );
 }
 
-// ─── PANEL 3 — Photo wipe + bio ────────────────────────────────────────────
-// Scroll offset "start 80%" → "start 20%":
-//   progress = 0 when panel-top is 80% down the viewport (just peeking in)
-//   progress = 1 when panel-top is 20% down the viewport (well inside view)
-// This gives a generous animation window in the middle of the viewport.
-
+// ─── PANEL 3 — Photo wipe + bio (void canvas) ─────────────────────────────
 function BioPanel() {
   const panelRef = useRef(null);
   const [entered, setEntered] = useState(false);
@@ -215,7 +257,7 @@ function BioPanel() {
     <div
       ref={panelRef}
       style={{
-        background: BG,
+        background: VOID,
         width: "100%",
         minHeight: "100vh",
         position: "relative",
@@ -236,6 +278,20 @@ function BioPanel() {
         }}
       >
         ABOUT ME
+      </motion.div>
+
+      {/* panel number */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={entered ? { opacity: 1 } : {}}
+        transition={{ duration: 0.35 }}
+        style={{
+          position: "absolute", top: 28, right: 36,
+          fontFamily: MONO, fontWeight: 700,
+          fontSize: "clamp(15px, 1.8vw, 22px)", color: BONE,
+        }}
+      >
+        3/3
       </motion.div>
 
       {/* content column */}
@@ -267,7 +323,7 @@ function BioPanel() {
           </motion.div>
         </div>
 
-        {/* NAME */}
+        {/* NAME — serif italic "hello" + sans caps name */}
         <motion.div
           style={{
             marginTop: 28,
@@ -277,20 +333,38 @@ function BioPanel() {
             y: nameY,
           }}
         >
-          <div style={{ fontFamily: MONO, fontSize: "13px", letterSpacing: "0.12em", color: WHITE, textTransform: "uppercase", marginBottom: 4 }}>
-            HELLO!
+          <div style={{
+            fontFamily: SERIF, fontStyle: "italic", fontWeight: 400,
+            fontSize: "16px", letterSpacing: "-0.01em", color: ASH,
+            marginBottom: 6,
+          }}>
+            hello, I'm
           </div>
-          <div style={{ fontFamily: MONO, fontSize: "13px", letterSpacing: "0.12em", color: WHITE, textTransform: "uppercase" }}>
-            I'M AKHIL DWIVEDI
+          <div style={{
+            fontFamily: SANS, fontWeight: 900,
+            fontSize: "18px", letterSpacing: "0.06em", color: BONE,
+            textTransform: "uppercase",
+          }}>
+            AKHIL DWIVEDI
           </div>
         </motion.div>
 
         {/* MY EXPERIENCE + bio */}
         <motion.div style={{ marginTop: 44, opacity: expOpacity, y: expY }}>
-          <div style={{ fontFamily: MONO, fontSize: "11px", letterSpacing: "0.18em", color: DIM, textTransform: "uppercase", display: "flex", alignItems: "center", gap: 6, marginBottom: 20 }}>
+          <div style={{
+            fontFamily: MONO, fontSize: "11px",
+            letterSpacing: "0.18em", color: DIM,
+            textTransform: "uppercase",
+            display: "flex", alignItems: "center", gap: 6,
+            marginBottom: 20,
+          }}>
             MY EXPERIENCE <span style={{ fontSize: "12px" }}>↘</span>
           </div>
-          <p style={{ fontFamily: MONO, fontSize: "12px", lineHeight: 2.0, letterSpacing: "0.1em", color: BODY, textTransform: "uppercase", margin: 0, maxWidth: 520 }}>
+          <p style={{
+            fontFamily: MONO, fontSize: "12px", lineHeight: 2.0,
+            letterSpacing: "0.1em", color: ASH,
+            textTransform: "uppercase", margin: 0, maxWidth: 520,
+          }}>
             A 4TH YEAR CSE STUDENT BUILDING PRODUCTION-GRADE
             <br />
             INFRA. PREVIOUSLY INTERN AT 47BILLION — FULL STACK
@@ -313,7 +387,7 @@ function BioPanel() {
 // ─── ROOT ──────────────────────────────────────────────────────────────────
 export default function About() {
   return (
-    <section id="about" style={{ background: BG }}>
+    <section id="about" style={{ background: VOID }}>
       <TitlePanel />
       <ManifestoPanel />
       <BioPanel />

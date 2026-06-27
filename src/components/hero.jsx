@@ -60,9 +60,9 @@ const SLASH_LIST = [
 
 const BASED_IN   = "BASED IN INDORE, MP";
 const RECENT_TAG = "RECENT ROLE";
-const RECENT_VAL = "47BILLION — JENKINS / PROMETHEUS / GRAFANA";
+const RECENT_VAL = "47BILLION — FULL STACK / RAG / VAPT";
 const AVAIL_TAG  = "OPEN TO INTERNSHIPS  ↘";
-const AVAIL_VAL  = "akhil@akd.dev";
+const AVAIL_VAL  = "akhildwivedi453@gmail.com";
 
 // ─── live uptime ticker ───────────────────────────────────────────────────────
 
@@ -79,9 +79,81 @@ function UptimeTicker() {
   const s = String(elapsed % 60).padStart(2, "0");
 
   return (
-    <span className="font-mono text-[10px] tracking-[0.18em] text-cream/40">
+    <span className="font-mono text-[10px] tracking-[0.18em] text-dim">
       {h}:{m}:{s}
     </span>
+  );
+}
+
+// ─── signal accent dot ───────────────────────────────────────────────────────
+
+function SignalDot() {
+  return (
+    <motion.span
+      animate={{ opacity: [1, 0.3, 1] }}
+      transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
+      className="inline-block w-[6px] h-[6px] rounded-full bg-signal"
+    />
+  );
+}
+
+// ─── navbar component (sticky, lives above all sections) ─────────────────────
+
+export function Navbar() {
+  return (
+    <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-10 py-5 bg-void/80 backdrop-blur-md border-b border-bone/5 transition-all duration-300">
+      {/* wordmark */}
+      <motion.div
+        variants={fadeIn}
+        initial="hidden"
+        animate="visible"
+        custom={0}
+        className="font-mono text-[14px] tracking-[0.14em] text-bone leading-tight"
+      >
+        <div>AKHIL</div>
+        <div>DWIVEDI</div>
+      </motion.div>
+
+      {/* center links */}
+      <ul className="hidden md:flex items-center gap-10">
+        {NAV_LINKS.map((link, i) => (
+          <motion.li
+            key={link}
+            variants={fadeIn}
+            initial="hidden"
+            animate="visible"
+            custom={i * 0.6 + 0.1}
+          >
+            <a
+              href={`#${link.toLowerCase()}`}
+              className="font-mono text-[14px] tracking-[0.2em] text-ash/50 hover:text-bone transition-colors duration-300"
+            >
+              [ {link} ]
+            </a>
+          </motion.li>
+        ))}
+      </ul>
+
+      {/* right — signal dot + uptime + contact */}
+      <motion.div
+        variants={fadeIn}
+        initial="hidden"
+        animate="visible"
+        custom={0.5}
+        className="flex items-center gap-6"
+      >
+        <div className="flex items-center gap-2">
+          <SignalDot />
+          <UptimeTicker />
+        </div>
+        <a
+          href="mailto:akhildwivedi453@gmail.com"
+          className="font-mono text-[14px] tracking-[0.16em] text-bone border-b border-iron pb-px hover:border-bone transition-colors duration-300"
+        >
+          CONTACT ↗
+        </a>
+      </motion.div>
+    </nav>
   );
 }
 
@@ -90,62 +162,12 @@ function UptimeTicker() {
 export default function Hero() {
   return (
     <section
-      className="relative w-full min-h-screen overflow-hidden select-none bg-dark"
+      className="relative w-full min-h-screen overflow-hidden select-none bg-void"
     >
-      {/* ── nav ─────────────────────────────────────────────────── */}
-      <nav className="absolute top-0 left-0 right-0 z-30 flex items-center justify-between px-8 pt-8">
-        {/* wordmark */}
-        <motion.div
-          variants={fadeIn}
-          initial="hidden"
-          animate="visible"
-          custom={0}
-          className="font-mono text-[11px] tracking-[0.14em] text-cream leading-tight"
-        >
-          <div>AKHIL</div>
-          <div>DWIVEDI</div>
-        </motion.div>
-
-        {/* center links */}
-        <ul className="hidden md:flex items-center gap-10">
-          {NAV_LINKS.map((link, i) => (
-            <motion.li
-              key={link}
-              variants={fadeIn}
-              initial="hidden"
-              animate="visible"
-              custom={i * 0.6 + 0.1}
-            >
-              <a
-                href={`#${link.toLowerCase()}`}
-                className="font-mono text-[10px] tracking-[0.2em] text-cream/50 hover:text-cream transition-colors duration-300"
-              >
-                [ {link} ]
-              </a>
-            </motion.li>
-          ))}
-        </ul>
-
-        {/* right — uptime + contact */}
-        <motion.div
-          variants={fadeIn}
-          initial="hidden"
-          animate="visible"
-          custom={0.5}
-          className="flex items-center gap-6"
-        >
-          <UptimeTicker />
-          <a
-            href="mailto:akhil@akd.dev"
-            className="font-mono text-[10px] tracking-[0.16em] text-cream border-b border-cream/30 pb-px hover:border-cream transition-colors duration-300"
-          >
-            CONTACT ↗
-          </a>
-        </motion.div>
-      </nav>
+      {/* nav is now rendered at App level as a fixed element */}
 
       {/* ── giant headline ───────────────────────────────────────── */}
-      {/* Line 1 */}
+      {/* Line 1 — DEVOPS */}
       <div className="absolute top-[14%] left-0 right-0 overflow-hidden z-10 px-6 md:px-8">
         <div className="overflow-hidden">
           <motion.h1
@@ -153,9 +175,10 @@ export default function Hero() {
             initial="hidden"
             animate="visible"
             custom={1}
-            className="font-sans font-black text-cream leading-none tracking-[-0.03em] whitespace-nowrap"
+            className="font-sans font-black text-bone leading-none whitespace-nowrap"
             style={{
               fontSize: "clamp(64px, 13vw, 195px)",
+              letterSpacing: "-0.06em",
             }}
           >
             DEVOPS
@@ -163,10 +186,33 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Line 2 */}
+      {/* Serif italic connective — "engineering" */}
       <div
         className="absolute left-0 right-0 overflow-hidden z-10 px-6 md:px-8"
-        style={{ top: "calc(14% + clamp(62px, 12.4vw, 188px))" }}
+        style={{ top: "calc(14% + clamp(58px, 11.8vw, 178px))" }}
+      >
+        <div className="overflow-hidden">
+          <motion.p
+            variants={clipUp}
+            initial="hidden"
+            animate="visible"
+            custom={1.2}
+            className="font-serif italic font-normal text-ash leading-none"
+            style={{
+              fontSize: "clamp(24px, 3.2vw, 42px)",
+              letterSpacing: "-0.02em",
+              paddingLeft: "0.15em",
+            }}
+          >
+            engineering
+          </motion.p>
+        </div>
+      </div>
+
+      {/* Line 2 — SYSTEMS (outline) */}
+      <div
+        className="absolute left-0 right-0 overflow-hidden z-10 px-6 md:px-8"
+        style={{ top: "calc(14% + clamp(88px, 16vw, 240px))" }}
       >
         <div className="overflow-hidden">
           <motion.h1
@@ -174,14 +220,15 @@ export default function Hero() {
             initial="hidden"
             animate="visible"
             custom={1.4}
-            className="font-sans font-black leading-none tracking-[-0.03em] whitespace-nowrap"
+            className="font-sans font-black leading-none whitespace-nowrap"
             style={{
               fontSize: "clamp(64px, 13vw, 195px)",
+              letterSpacing: "-0.06em",
               WebkitTextFillColor: "transparent",
-              WebkitTextStroke: "2px color-mix(in srgb, var(--color-cream) 60%, transparent)",
+              WebkitTextStroke: "2px color-mix(in srgb, var(--color-bone) 50%, transparent)",
             }}
           >
-            ENGINEER
+            SYSTEMS
           </motion.h1>
         </div>
       </div>
@@ -200,7 +247,7 @@ export default function Hero() {
       >
         {/* photo — grayscale, fills the frame */}
         <div
-          className="w-full bg-surface border border-cream/10 overflow-hidden"
+          className="w-full bg-surface border border-bone/10 overflow-hidden"
           style={{ aspectRatio: "3/4" }}
         >
           <img
@@ -219,7 +266,7 @@ export default function Hero() {
               initial="hidden"
               animate="visible"
               custom={2.2 + i * 0.3}
-              className="font-sans font-bold text-cream leading-none"
+              className="font-sans font-bold text-bone leading-none"
               style={{ fontSize: "clamp(10px, 1.1vw, 14px)", letterSpacing: "0.04em" }}
             >
               {line}
@@ -234,7 +281,7 @@ export default function Hero() {
         initial="hidden"
         animate="visible"
         custom={2.8}
-        className="absolute z-30 font-mono text-cream/35 tracking-[0.22em]"
+        className="absolute z-30 font-mono text-dim tracking-[0.22em]"
         style={{
           fontSize: "10px",
           top: "clamp(54px, 8vw, 112px)",
@@ -252,12 +299,12 @@ export default function Hero() {
         custom={3.2}
         className="absolute bottom-10 left-8 z-20 flex flex-col gap-[6px]"
       >
-        <p className="font-mono text-[10px] tracking-[0.18em] text-cream/40">
+        <p className="font-mono text-[10px] tracking-[0.18em] text-dim">
           {AVAIL_TAG}
         </p>
         <a
-          href="mailto:akhil@akd.dev"
-          className="font-mono text-[13px] tracking-[0.06em] text-cream hover:text-cream/60 transition-colors duration-300"
+          href="mailto:akhildwivedi453@gmail.com"
+          className="font-mono text-[13px] tracking-[0.06em] text-bone hover:text-ash transition-colors duration-300"
         >
           {AVAIL_VAL}
         </a>
@@ -271,10 +318,10 @@ export default function Hero() {
         custom={3.4}
         className="absolute bottom-10 right-8 z-20 flex flex-col gap-[6px] text-right"
       >
-        <p className="font-mono text-[10px] tracking-[0.18em] text-cream/40">
+        <p className="font-mono text-[10px] tracking-[0.18em] text-dim">
           {RECENT_TAG}  ↘
         </p>
-        <p className="font-mono text-[12px] tracking-[0.04em] text-cream font-bold">
+        <p className="font-mono text-[12px] tracking-[0.04em] text-bone font-bold">
           {RECENT_VAL}
         </p>
       </motion.div>
@@ -285,7 +332,7 @@ export default function Hero() {
         initial="hidden"
         animate="visible"
         custom={3.6}
-        className="absolute bottom-0 left-0 right-0 h-px z-10 bg-cream/7"
+        className="absolute bottom-0 left-0 right-0 h-px z-10 bg-iron/30"
       />
     </section>
   );
