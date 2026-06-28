@@ -117,8 +117,7 @@ function CoePlatformCard() {
       <h3 style={cardTitle}>COE PLATFORM</h3>
 
       <p style={cardBody}>
-        Architected robust RBAC framework with a three-tier role system. Designed
-        custom React hooks for seamless API consumption and state management.
+        Full-stack knowledge management platform with JWT OAuth2 auth, real-time notifications, and event + blog management. Built with React, Redux, FastAPI, and MongoDB.
       </p>
 
       {/* ── RBAC flow diagram ────────────────────────────────────── */}
@@ -178,7 +177,7 @@ function RagChatbotCard() {
     <div style={cardStyle}>
       <CardHeader module="02" icon="◉" />
 
-      <h3 style={cardTitle}>RAG CHATBOT</h3>
+      <h3 style={cardTitle}>BRSR AI ASSISTANT</h3>
 
       {/* ── Big metric ─────────────────────────────────────────── */}
       <div
@@ -199,7 +198,7 @@ function RagChatbotCard() {
             letterSpacing: "-0.04em",
           }}
         >
-          60%
+          7+
         </div>
         <div
           style={{
@@ -211,13 +210,12 @@ function RagChatbotCard() {
             marginTop: 6,
           }}
         >
-          REDUCTION IN MANUAL QUERIES
+          AI ACTIONS SUPPORTED
         </div>
       </div>
 
       <p style={cardBody}>
-        Integrated open-source embedding models. Implemented advanced search
-        logic replacing proprietary APIs to drastically reduce operational costs.
+        Built a full-stack sustainability reporting assistant with RAG over BRSR regulations. FastAPI + Gemini backend with SSE streaming, tone control, and compliance checking — containerized with Docker Compose.
       </p>
     </div>
   );
