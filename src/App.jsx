@@ -4,7 +4,7 @@ import Preloader from "./components/preLoader";
 import Hero, { Navbar } from "./components/hero";
 import About from "./components/about";
 import Work from "./components/Work";
-import project from "./components/projects"
+import Projects from "./components/Projects";
 
 
 
@@ -25,7 +25,7 @@ export default function App() {
           <Hero />
           <About />
           <Work />
-          <project/>
+          <Projects />
 
         </>
       )}
