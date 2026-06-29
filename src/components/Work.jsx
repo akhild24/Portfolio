@@ -383,6 +383,8 @@ const cardStyle = {
   boxSizing: "border-box",
   display: "flex",
   flexDirection: "column",
+  flex: 1,
+  transition: "transform 0.25s ease, filter 0.25s ease, border-color 0.25s ease",
 };
 
 const cardTitle = {
@@ -583,8 +585,38 @@ export default function Work() {
           gap: 20,
         }}
       >
-        <CoePlatformCard />
-        <RagChatbotCard />
+        <a
+          href="https://github.com/sujaldef/centerofexcellence"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ textDecoration: "none", color: "inherit", display: "flex" }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = "translateY(-4px)";
+            e.currentTarget.style.filter = "brightness(1.08)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = "translateY(0)";
+            e.currentTarget.style.filter = "brightness(1)";
+          }}
+        >
+          <CoePlatformCard />
+        </a>
+        <a
+          href="https://github.com/akhild24/finalai"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ textDecoration: "none", color: "inherit", display: "flex" }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = "translateY(-4px)";
+            e.currentTarget.style.filter = "brightness(1.08)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = "translateY(0)";
+            e.currentTarget.style.filter = "brightness(1)";
+          }}
+        >
+          <RagChatbotCard />
+        </a>
         <VaptCard />
       </div>
 
