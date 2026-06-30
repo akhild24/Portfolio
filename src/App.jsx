@@ -6,19 +6,17 @@ import About from "./components/about";
 import Work from "./components/Work";
 import Projects from "./components/Projects";
 
-
-
 export default function App() {
   const [preloaderDone, setPreloaderDone] = useState(false);
 
   return (
-    <div style={{ background: "var(--color-void)", overflowX: "hidden" }}>
+    <div style={{ background: "var(--color-void)" }}>
       <AnimatePresence>
         {!preloaderDone && (
           <Preloader onComplete={() => setPreloaderDone(true)} />
         )}
       </AnimatePresence>
- 
+
       {preloaderDone && (
         <>
           <Navbar />
@@ -26,7 +24,6 @@ export default function App() {
           <About />
           <Work />
           <Projects />
-
         </>
       )}
     </div>
