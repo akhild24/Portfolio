@@ -1,96 +1,115 @@
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
+import {
+  Infinity as InfinityIcon,
+  Server,
+  KeyRound,
+  Webhook,
+  GitFork,
+  Kanban,
+  Flame,
+  BellRing,
+  ShieldAlert,
+  Shield,
+  Terminal,
+} from "lucide-react";
 
-/**
- * No setup required. Icons are loaded as SVG files directly from the
- * devicon CDN — no npm install, no font import, no CSS class guessing.
- * Every URL below was HTTP-verified (200) before being used.
- */
+const lucideIcons = {
+  Infinity: InfinityIcon,
+  Server: Server,
+  KeyRound: KeyRound,
+  Webhook: Webhook,
+  GitFork: GitFork,
+  Kanban: Kanban,
+  Flame: Flame,
+  BellRing: BellRing,
+  ShieldAlert: ShieldAlert,
+  Shield: Shield,
+  Terminal: Terminal,
+};
 
-const DEVICON_BASE = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons";
-const icon = (name, variant = "original") => `${DEVICON_BASE}/${name}/${name}-${variant}.svg`;
+// ── DESIGN SYSTEM VARIABLES ───────────────────────────────────────────────────
+const VOID = "var(--color-void)";
+const SURFACE = "var(--color-surface)";
+const PLATE = "var(--color-plate)";
+const SMOKE = "var(--color-smoke)";
+const GRAPHITE = "var(--color-graphite)";
+const LINEN = "var(--color-linen)";
+const BONE = "var(--color-bone)";
+const ASH = "var(--color-ash)";
+const DIM = "var(--color-dim)";
+const IRON = "var(--color-iron)";
+const INK = "var(--color-ink)";
+const SIGNAL = "var(--color-signal)";
+const ARTERIAL = "#fe1e34";
 
-// ── SKILL ICON ─────────────────────────────────────────────────────────────────
-
-const SkillIcon = ({ src, label, invert = false }) => {
+// ── SKILL ICON COMPONENT ──────────────────────────────────────────────────────
+const SkillIcon = ({ label, iconClass, lucide, accent }) => {
   const [hovered, setHovered] = useState(false);
-  const [errored, setErrored] = useState(false);
-
-  // Text-only pill: tools with no devicon, or if an image genuinely fails to load
-  if (!src || errored) {
-    return (
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: "0 16px",
-          height: "80px",
-          minWidth: "90px",
-          border: "1px solid #262530",
-          background: "#0d0d12",
-        }}
-      >
-        <span
-          style={{
-            fontFamily: "JetBrains Mono, monospace",
-            fontSize: "9px",
-            letterSpacing: "0.1em",
-            color: "#525260",
-            textAlign: "center",
-            lineHeight: 1.5,
-            textTransform: "uppercase",
-          }}
-        >
-          {label}
-        </span>
-      </div>
-    );
-  }
+  const LucideIcon = lucide ? lucideIcons[lucide] : null;
 
   return (
     <motion.div
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
+      whileHover={{
+        backgroundColor: PLATE,
+        borderColor: accent,
+        boxShadow: `0 0 16px -4px color-mix(in srgb, ${accent} 25%, transparent)`,
+        y: -3,
+      }}
+      transition={{ duration: 0.2, ease: "easeOut" }}
       style={{
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
         gap: "10px",
-        width: "90px",
-        height: "80px",
-        border: "1px solid #262530",
-        background: hovered ? "#1c1c22" : "#141419",
+        height: "88px",
+        border: `1px solid ${SMOKE}`,
+        background: SURFACE,
         cursor: "default",
-        transition: "background 0.15s",
-        flexShrink: 0,
+        borderRadius: "var(--radius-sm)",
       }}
     >
-      <motion.img
-        src={src}
-        alt={label}
-        onError={() => setErrored(true)}
-        animate={{ scale: hovered ? 1.2 : 1 }}
-        transition={{ duration: 0.18, ease: "easeOut" }}
-        style={{
-          width: "30px",
-          height: "30px",
-          objectFit: "contain",
-          filter: invert ? "invert(1)" : "none",
-          display: "block",
-        }}
-      />
+      {iconClass ? (
+        <motion.i
+          className={`${iconClass} text-3xl`}
+          animate={{ scale: hovered ? 1.15 : 1 }}
+          transition={{ duration: 0.18, ease: "easeOut" }}
+          style={{
+            color: hovered ? accent : ASH,
+            transition: "color 0.2s ease",
+            display: "block",
+            lineHeight: 1,
+          }}
+        />
+      ) : LucideIcon ? (
+        <motion.div
+          animate={{ scale: hovered ? 1.15 : 1 }}
+          transition={{ duration: 0.18, ease: "easeOut" }}
+          style={{
+            color: hovered ? accent : ASH,
+            transition: "color 0.2s ease",
+            display: "block",
+          }}
+        >
+          <LucideIcon size={28} strokeWidth={1.5} />
+        </motion.div>
+      ) : null}
+
       <motion.span
-        animate={{ opacity: hovered ? 1 : 0.55 }}
+        animate={{ opacity: hovered ? 1 : 0.6 }}
         transition={{ duration: 0.15 }}
         style={{
-          fontFamily: "JetBrains Mono, monospace",
+          fontFamily: "var(--font-mono)",
           fontSize: "8px",
-          letterSpacing: "0.1em",
-          color: "#d4d2d2",
+          letterSpacing: "0.08em",
+          color: hovered ? BONE : ASH,
           textTransform: "uppercase",
-          whiteSpace: "nowrap",
+          whiteSpace: "pre-line",
+          textAlign: "center",
+          lineHeight: 1.2,
         }}
       >
         {label}
@@ -99,87 +118,83 @@ const SkillIcon = ({ src, label, invert = false }) => {
   );
 };
 
-// ── DOMAIN DATA ────────────────────────────────────────────────────────────────
-// invert: true forces near-black brand logos (GitHub, Linux, Bash) to render
-// white so they're visible against the dark card background.
-
+// ── DOMAIN DATA ──────────────────────────────────────────────────────────────
 const domains = [
   {
     id: "01",
     label: "CLOUD & DEVOPS",
-    accent: "#00e38f",
+    accent: SIGNAL,
     skills: [
-      { src: icon("amazonwebservices", "original-wordmark"), label: "AWS" },
-      { src: icon("docker"), label: "Docker" },
-      { src: icon("kubernetes"), label: "Kubernetes" },
-      { src: icon("terraform"), label: "Terraform" },
-      { src: icon("jenkins"), label: "Jenkins" },
-      { src: icon("github"), label: "GH Actions", invert: true },
-      { src: icon("nginx"), label: "Nginx" },
-      { src: icon("linux"), label: "Linux", invert: true },
-      { src: null, label: "Helm" },
-      { src: null, label: "CI / CD" },
-      { src: null, label: "High\nAvailability" },
+      { label: "AWS", iconClass: "devicon-amazonwebservices-plain" },
+      { label: "Docker", iconClass: "devicon-docker-plain" },
+      { label: "Kubernetes", iconClass: "devicon-kubernetes-plain" },
+      { label: "Terraform", iconClass: "devicon-terraform-plain" },
+      { label: "Jenkins", iconClass: "devicon-jenkins-line" },
+      { label: "GH Actions", iconClass: "devicon-github-original" },
+      { label: "Nginx", iconClass: "devicon-nginx-original" },
+      { label: "Linux", iconClass: "devicon-linux-plain" },
+      { label: "Helm", iconClass: "devicon-helm-original" },
+      { label: "CI / CD", lucide: "Infinity" },
+      { label: "HA / Scale", lucide: "Server" },
     ],
   },
   {
     id: "02",
     label: "LANGUAGES",
-    accent: "#d4d2d2",
+    accent: ASH,
     skills: [
-      { src: icon("python"), label: "Python" },
-      { src: icon("javascript"), label: "JavaScript" },
-      { src: icon("bash"), label: "Bash / Shell", invert: true },
-      { src: icon("cplusplus"), label: "C++" },
-      { src: icon("html5"), label: "HTML5" },
-      { src: icon("css3"), label: "CSS3" },
+      { label: "Python", iconClass: "devicon-python-plain" },
+      { label: "JavaScript", iconClass: "devicon-javascript-plain" },
+      { label: "Bash / Shell", iconClass: "devicon-bash-plain" },
+      { label: "C++", iconClass: "devicon-cplusplus-plain" },
+      { label: "HTML5", iconClass: "devicon-html5-plain" },
+      { label: "CSS3", iconClass: "devicon-css3-plain" },
     ],
   },
   {
     id: "03",
     label: "FRAMEWORKS & LIBRARIES",
-    accent: "#00e38f",
+    accent: SIGNAL,
     skills: [
-      { src: icon("react"), label: "React" },
-      { src: icon("fastapi"), label: "FastAPI" },
-      { src: icon("tailwindcss"), label: "Tailwind" },
-      { src: icon("redux"), label: "Redux Toolkit" },
-      { src: null, label: "JWT / OAuth2" },
-      { src: null, label: "REST APIs" },
+      { label: "React", iconClass: "devicon-react-original" },
+      { label: "FastAPI", iconClass: "devicon-fastapi-plain" },
+      { label: "Tailwind", iconClass: "devicon-tailwindcss-plain" },
+      { label: "Redux", iconClass: "devicon-redux-original" },
+      { label: "JWT / OAuth2", lucide: "KeyRound" },
+      { label: "REST APIs", lucide: "Webhook" },
     ],
   },
   {
     id: "04",
     label: "DATABASES & TOOLS",
-    accent: "#d4d2d2",
+    accent: ASH,
     skills: [
-      { src: icon("postgresql"), label: "PostgreSQL" },
-      { src: icon("mongodb"), label: "MongoDB" },
-      { src: icon("git"), label: "Git" },
-      { src: icon("postman"), label: "Postman" },
-      { src: null, label: "Version\nControl" },
-      { src: null, label: "Agile" },
+      { label: "PostgreSQL", iconClass: "devicon-postgresql-plain" },
+      { label: "MongoDB", iconClass: "devicon-mongodb-plain" },
+      { label: "Git", iconClass: "devicon-git-plain" },
+      { label: "Postman", iconClass: "devicon-postman-plain" },
+      { label: "Git Flow", lucide: "GitFork" },
+      { label: "Agile", lucide: "Kanban" },
     ],
   },
   {
     id: "05",
     label: "OBSERVABILITY & SECURITY",
-    accent: "#fe1e34",
+    accent: ARTERIAL,
     skills: [
-      { src: icon("prometheus"), label: "Prometheus" },
-      { src: icon("grafana"), label: "Grafana" },
-      { src: null, label: "Loki" },
-      { src: null, label: "Alertmanager" },
-      { src: null, label: "OpenTelemetry" },
-      { src: null, label: "VAPT" },
-      { src: null, label: "OWASP Top 10" },
-      { src: null, label: "Pen Testing" },
+      { label: "Prometheus", iconClass: "devicon-prometheus-original" },
+      { label: "Grafana", iconClass: "devicon-grafana-plain" },
+      { label: "Loki", lucide: "Flame" },
+      { label: "Alertmanager", lucide: "BellRing" },
+      { label: "OpenTelemetry", iconClass: "devicon-opentelemetry-plain" },
+      { label: "VAPT", lucide: "ShieldAlert" },
+      { label: "OWASP Top 10", lucide: "Shield" },
+      { label: "Pen Testing", lucide: "Terminal" },
     ],
   },
 ];
 
-// ── DOMAIN ROW ─────────────────────────────────────────────────────────────────
-
+// ── DOMAIN ROW COMPONENT ──────────────────────────────────────────────────────
 const DomainRow = ({ domain, index }) => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
@@ -190,29 +205,28 @@ const DomainRow = ({ domain, index }) => {
       initial={{ opacity: 0, y: 24 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.55, delay: index * 0.07, ease: [0.16, 1, 0.3, 1] }}
+      className="grid grid-cols-1 md:grid-cols-[200px_1fr]"
       style={{
-        display: "grid",
-        gridTemplateColumns: "200px 1fr",
-        borderBottom: "1px solid #1c1c22",
+        borderBottom: `1px solid ${PLATE}`,
       }}
     >
       {/* left — label column */}
       <div
         style={{
           padding: "28px 24px",
-          borderRight: "1px solid #1c1c22",
-          background: "#0a0a0e",
+          background: "rgba(10, 10, 14, 0.4)",
           display: "flex",
           flexDirection: "column",
           gap: "10px",
         }}
+        className="md:border-r border-b md:border-b-0 border-plate"
       >
         <span
           style={{
-            fontFamily: "JetBrains Mono, monospace",
+            fontFamily: "var(--font-mono)",
             fontSize: "9px",
             letterSpacing: "0.2em",
-            color: "#393945",
+            color: GRAPHITE,
           }}
         >
           {domain.id}
@@ -231,10 +245,10 @@ const DomainRow = ({ domain, index }) => {
           />
           <span
             style={{
-              fontFamily: "JetBrains Mono, monospace",
+              fontFamily: "var(--font-mono)",
               fontSize: "10px",
               letterSpacing: "0.14em",
-              color: "#d4d2d2",
+              color: ASH,
               lineHeight: 1.6,
               textTransform: "uppercase",
             }}
@@ -257,24 +271,20 @@ const DomainRow = ({ domain, index }) => {
       {/* right — icon grid */}
       <div
         style={{
-          background: "#141419",
-          padding: "16px 20px",
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "6px",
-          alignContent: "center",
+          background: VOID,
+          padding: "24px 20px",
         }}
+        className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-3"
       >
         {domain.skills.map((skill) => (
-          <SkillIcon key={skill.label} src={skill.src} label={skill.label} invert={skill.invert} />
+          <SkillIcon key={skill.label} label={skill.label} iconClass={skill.iconClass} lucide={skill.lucide} accent={domain.accent} />
         ))}
       </div>
     </motion.div>
   );
 };
 
-// ── SECTION ────────────────────────────────────────────────────────────────────
-
+// ── MAIN SKILLS SECTION ───────────────────────────────────────────────────────
 export default function Skills() {
   const titleRef = useRef(null);
   const titleInView = useInView(titleRef, { once: true });
@@ -282,14 +292,14 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      style={{ background: "#080808", paddingBottom: "120px" }}
+      style={{ background: VOID, paddingBottom: "120px" }}
     >
       {/* linen header */}
       <div
         style={{
-          background: "#f3efef",
+          background: LINEN,
           padding: "48px clamp(24px, 6vw, 100px) 40px",
-          borderBottom: "1px solid #d4d2d2",
+          borderBottom: `1px solid ${ASH}`,
           display: "flex",
           alignItems: "flex-end",
           justifyContent: "space-between",
@@ -305,23 +315,27 @@ export default function Skills() {
         >
           <h2
             style={{
-              fontFamily: "Inter, sans-serif",
+              fontFamily: "var(--font-sans)",
               fontWeight: 900,
               fontSize: "clamp(40px, 6vw, 80px)",
               letterSpacing: "-0.04em",
-              color: "#080808",
+              color: INK,
               lineHeight: 1,
               margin: 0,
             }}
           >
-            SKILLS
+            SK
+            <span style={{
+              WebkitTextFillColor: "transparent",
+              WebkitTextStroke: `2px ${INK}`,
+            }}>ILLS</span>
           </h2>
           <p
             style={{
-              fontFamily: "Playfair Display, serif",
+              fontFamily: "var(--font-serif)",
               fontStyle: "italic",
               fontSize: "clamp(14px, 2vw, 20px)",
-              color: "#525260",
+              color: IRON,
               margin: "8px 0 0",
             }}
           >
@@ -331,29 +345,29 @@ export default function Skills() {
 
         <div
           style={{
-            fontFamily: "JetBrains Mono, monospace",
+            fontFamily: "var(--font-mono)",
             fontSize: "10px",
-            color: "#525260",
+            color: IRON,
             letterSpacing: "0.15em",
             textAlign: "right",
             lineHeight: 2.2,
           }}
         >
           <div>5 DOMAINS</div>
-          <div style={{ color: "#080808", fontWeight: 700 }}>30+ TOOLS</div>
+          <div style={{ color: INK, fontWeight: 700 }}>35+ TOOLS</div>
         </div>
       </div>
 
       {/* domain rows */}
       <div
         style={{
-          background: "#080808",
+          background: VOID,
           padding: "56px clamp(24px, 6vw, 100px) 0",
         }}
       >
         <div
           style={{
-            border: "1px solid #1c1c22",
+            border: `1px solid ${PLATE}`,
             overflow: "hidden",
           }}
         >
@@ -364,4 +378,4 @@ export default function Skills() {
       </div>
     </section>
   );
-}
+}

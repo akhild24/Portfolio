@@ -49,7 +49,8 @@ const photoReveal = {
 const NAV_LINKS = [
   { label: "ABOUT", href: "#about" },
   { label: "WORK", href: "#work" },
-  { label: "PROJECTS & SKILLS", href: "#projects" },
+  { label: "PROJECTS", href: "#projects" },
+  { label: "SKILLS", href: "#skills" },
   { label: "CONTACT", href: "#contact" }
 ];
 
