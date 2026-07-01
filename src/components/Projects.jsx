@@ -12,29 +12,83 @@ const MONO     = "var(--font-mono)";
 const SANS     = "var(--font-sans)";
 const ARTERIAL = "#fe1e34";
 
-const INTERVAL = 3000; // ms per card
+const INTERVAL = 30000;
 
 /* ── Project data ────────────────────────────────────────────────────────────── */
-export const projects = [
+const projects = [
   {
     index: "01",
+    year: "2025.Q2",
     tag: "MAIN PROJECT",
+    connective: "engineered for production",
     categories: ["MLOPS", "EKS", "TERRAFORM", "OBSERVABILITY"],
     title: "MLOPS\nSERVING\nPLATFORM",
     description:
-      "Served HuggingFace sentence-transformer via FastAPI with Docker multi-stage builds — cut image size by 60%. Deployed across 2 auto-scaling pods on EKS with ALB ingress and HPA. Terraform IaC (dev/prod workspaces) provisioning EKS cluster, VPC, and ALB from scratch. Jenkins CI/CD on EC2 with full observability via Prometheus, Grafana, Loki, and Alertmanager.",
+      "Serves all-MiniLM-L6-v2 sentence-transformer via FastAPI — multi-stage Docker build bakes model weights into the image, eliminating runtime downloads. HPA scales 2–5 pods on CPU > 70% / Mem > 80%. Terraform IaC across dev/prod workspaces provisions VPC, EKS, NAT GW, and ALB from scratch. Jenkins CI/CD on EC2. Full observability: Prometheus p95 latency alerts, Grafana dashboards, Loki log aggregation, Alertmanager.",
     stack: ["HuggingFace", "FastAPI", "Docker", "EKS", "Helm", "Terraform", "Jenkins", "Prometheus", "Grafana", "Loki"],
     metrics: [
-      { val: "60%",  label: "Image Size Cut" },
-      { val: "2",    label: "Auto-Scaling Pods" },
-      { val: "0",    label: "Idle AWS Spend" },
+      { val: "2–5",  label: "HPA Pod Range" },
+      { val: "3",    label: "Alert Rules" },
     ],
     status: "DEPLOYED",
-    link: "https://github.com/akhild24",
+    link: "https://github.com/akhild24/model-deployment",
   },
   {
     index: "02",
+    year: "2026.Q1",
+    tag: "HACKATHON · UDBHAV'26",
+    connective: "shipped in 24 hours",
+    categories: ["FULLSTACK", "DEVOPS", "BACKEND", "DEPLOYMENT"],
+    title: "UDAAN",
+    description:
+      "Top 10 nationally at Udbhav'26 — 24-hour hackathon, 275+ teams. Led backend integration, Git workflow, and full deployment pipeline under time constraints. Production-grade infra delivered under hackathon conditions.",
+    stack: ["React", "FastAPI","Gemini API integration", "Docker", "AWS", "MongoDB", "Git"],
+    metrics: [
+      { val: "Top 10", label: "of 275 Teams" },
+      { val: "24h",    label: "Build Time" },
+    ],
+    status: "COMPLETED",
+    link: "https://github.com/akhild24/Argus_Ai",
+  },
+  {
+  index: "03",
+  year: "2025.Q1",
+  tag: "CLOUD · AWS EKS",
+  connective: "async, event-driven architecture",
+  categories: ["MICROSERVICES", "KUBERNETES", "RABBITMQ", "HELM"],
+  title: "MICRO\nSERVICES\nARCH",
+  description:
+    "Python microservices on AWS EKS — users authenticate via JWT, upload a video, which is queued through RabbitMQ and processed asynchronously by a converter service. MongoDB and PostgreSQL provisioned via Helm. Covers Kubernetes networking, IAM roles, stateful service management, and end-to-end async communication.",
+  stack: ["Python", "Docker", "Kubernetes", "Helm", "EKS", "RabbitMQ", "MongoDB", "PostgreSQL", "JWT"],
+  metrics: [
+    { val: "4",    label: "Microservices" },
+    { val: "Async", label: "RabbitMQ Queue" },
+  ],
+  status: "COMPLETED",
+  link: "https://github.com/akhild24",
+},
+  {
+    index: "04",
+    year: "2025.Q2",
+    tag: "SECURITY · 47BILLION",
+    connective: "grey-box, production target",
+    categories: ["VAPT", "OWASP TOP 10", "GREY-BOX", "PENTEST"],
+    title: "VAPT\nENGAGEMENT",
+    description:
+      "Grey-box penetration testing on a live production platform — identified 50+ critical vulnerabilities including auth bypasses, broken RBAC, and input validation gaps. Delivered structured bug report adopted by the engineering team for patch prioritization. Methodology based on OWASP Top 10.",
+    stack: ["Postman", "OWASP", "Python", "RBAC Analysis", "Manual Testing"],
+    metrics: [
+      { val: "50+",   label: "Vulnerabilities" },
+      { val: "OWASP", label: "Methodology" },
+    ],
+    status: "COMPLETED",
+    link: null,
+  },
+  {
+    index: "05",
+    year: "2025.Q2",
     tag: "INTERNSHIP · 47BILLION",
+    connective: "built for compliance automation",
     categories: ["RAG", "LLM", "GEMINI API", "SSE"],
     title: "BRSR AI\nASSISTANT",
     description:
@@ -49,7 +103,9 @@ export const projects = [
   },
   {
     index: "03",
+    year: "2025.Q2",
     tag: "INTERNSHIP · 47BILLION",
+    connective: "engineered at scale",
     categories: ["REACT", "FASTAPI", "RBAC", "MONGODB"],
     title: "COE\nPLATFORM",
     description:
@@ -61,58 +117,13 @@ export const projects = [
     ],
     status: "DEPLOYED",
     link: "https://github.com/sujaldef/centerofexcellence",
-  },
-  {
-    index: "04",
-    tag: "SECURITY · 47BILLION",
-    categories: ["VAPT", "OWASP TOP 10", "GREY-BOX", "PENTEST"],
-    title: "VAPT\nENGAGEMENT",
-    description:
-      "Grey-box penetration testing on a live production platform — identified 50+ critical vulnerabilities including auth bypasses, broken RBAC, and input validation gaps. Delivered structured bug report adopted by the engineering team for patch prioritization. Methodology based on OWASP Top 10.",
-    stack: ["Burp Suite", "OWASP", "Nmap", "Python", "RBAC Analysis"],
-    metrics: [
-      { val: "50+",   label: "Vulnerabilities" },
-      { val: "OWASP", label: "Methodology" },
-    ],
-    status: "COMPLETED",
-    link: null,
-  },
-  {
-    index: "05",
-    tag: "HACKATHON · UDBHAV'26",
-    categories: ["FULLSTACK", "DEVOPS", "BACKEND", "DEPLOYMENT"],
-    title: "UDAAN",
-    description:
-      "Top 10 nationally at Udbhav'26 — 24-hour hackathon, 275+ teams. Led backend integration, Git workflow, and full deployment pipeline under time constraints. Production-grade infra delivered under hackathon conditions.",
-    stack: ["React", "FastAPI", "Docker", "AWS", "PostgreSQL", "Git"],
-    metrics: [
-      { val: "Top 10", label: "of 275+ Teams" },
-      { val: "24h",    label: "Build Time" },
-    ],
-    status: "COMPLETED",
-    link: null,
-  },
-  {
-    index: "06",
-    tag: "CLOUD · AWS EKS",
-    categories: ["MICROSERVICES", "KUBERNETES", "HELM", "REST"],
-    title: "MICRO\nSERVICES\nARCH",
-    description:
-      "Full microservices architecture on AWS — EKS cluster, VPC, node groups, and namespaces provisioned from scratch using Linux-based toolchain with no scaffolding. Helm charts for environment-aware deployments. Diagnosed pod eviction failures and multi-service networking issues. Cloud cost optimization with teardown automation — eliminated idle EKS spend.",
-    stack: ["FastAPI", "Docker", "Kubernetes", "Helm", "EKS", "VPC", "PostgreSQL", "MongoDB"],
-    metrics: [
-      { val: "EKS", label: "Orchestration" },
-      { val: "0",   label: "Idle Spend" },
-    ],
-    status: "DEPLOYED",
-    link: "https://github.com/akhild24",
-  },
+  }
 ];
 
 const CARD_COUNT = projects.length;
 
 /* ═══════════════════════════════════════════════════════════════════════════════
-   Projects — orchestration only, no card markup here
+   Projects
    ═══════════════════════════════════════════════════════════════════════════════ */
 export default function Projects() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -129,14 +140,12 @@ export default function Projects() {
     startRef.current = performance.now();
   }, []);
 
-  const next = useCallback(() => goTo((activeIndex + 1) % CARD_COUNT, 1),  [activeIndex, goTo]);
+  const next = useCallback(() => goTo((activeIndex + 1) % CARD_COUNT, 1), [activeIndex, goTo]);
   const prev = useCallback(() => goTo((activeIndex - 1 + CARD_COUNT) % CARD_COUNT, -1), [activeIndex, goTo]);
 
-  // RAF-driven progress bar + auto-advance
   useEffect(() => {
     if (paused) { cancelAnimationFrame(frameRef.current); return; }
     startRef.current = performance.now();
-
     const tick = (now) => {
       const p = Math.min((now - startRef.current) / INTERVAL, 1);
       setProgress(p);
@@ -154,7 +163,6 @@ export default function Projects() {
     return () => cancelAnimationFrame(frameRef.current);
   }, [paused, activeIndex]);
 
-  // Keyboard nav
   useEffect(() => {
     const onKey = (e) => {
       if (e.key === "ArrowRight") next();
@@ -178,7 +186,7 @@ export default function Projects() {
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      {/* ── Section header ─────────────────────────────────────────────────── */}
+      {/* ── Section header ─────────────────────────────────────────────── */}
       <div style={{
         padding: "80px clamp(24px, 6vw, 80px) 32px",
         borderBottom: `1px solid ${GRAPHITE}`,
@@ -227,7 +235,6 @@ export default function Projects() {
             <div style={{ color: ARTERIAL }}>SELECTED WORK</div>
           </div>
 
-          {/* PREV / NEXT */}
           <div style={{ display: "flex", gap: "8px" }}>
             {[["PREV", prev], ["NEXT", next]].map(([label, fn]) => (
               <button
@@ -253,7 +260,7 @@ export default function Projects() {
         </div>
       </div>
 
-      {/* ── Progress bar ───────────────────────────────────────────────────── */}
+      {/* ── Progress bar ───────────────────────────────────────────────── */}
       <div style={{ height: "1px", background: GRAPHITE, position: "relative", flexShrink: 0 }}>
         <div style={{
           position: "absolute",
@@ -263,7 +270,7 @@ export default function Projects() {
         }} />
       </div>
 
-      {/* ── Card stage ─────────────────────────────────────────────────────── */}
+      {/* ── Card stage ─────────────────────────────────────────────────── */}
       <div style={{
         flex: 1,
         position: "relative",
@@ -280,7 +287,7 @@ export default function Projects() {
         </AnimatePresence>
       </div>
 
-      {/* ── Bottom bar ─────────────────────────────────────────────────────── */}
+      {/* ── Bottom bar ─────────────────────────────────────────────────── */}
       <div style={{
         padding: "0 clamp(24px, 6vw, 80px) 28px",
         display: "flex",
@@ -288,7 +295,6 @@ export default function Projects() {
         justifyContent: "space-between",
         flexShrink: 0,
       }}>
-        {/* Dot indicators */}
         <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
           {projects.map((_, i) => (
             <button
@@ -306,8 +312,6 @@ export default function Projects() {
             />
           ))}
         </div>
-
-        {/* Counter */}
         <div style={{ fontFamily: MONO, fontSize: "11px", letterSpacing: "0.15em", color: DIM }}>
           <span style={{ color: BONE, fontWeight: 700 }}>{String(activeIndex + 1).padStart(2, "0")}</span>
           {" / "}

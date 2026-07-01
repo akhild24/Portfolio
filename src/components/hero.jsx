@@ -46,7 +46,12 @@ const photoReveal = {
 
 // ─── nav links ────────────────────────────────────────────────────────────────
 
-const NAV_LINKS = ["ABOUT", "WORK", "PROJECTS & SKILLS", "CONTACT"];
+const NAV_LINKS = [
+  { label: "ABOUT", href: "#about" },
+  { label: "WORK", href: "#work" },
+  { label: "PROJECTS & SKILLS", href: "#projects" },
+  { label: "CONTACT", href: "#contact" }
+];
 
 // ─── slash list (real resume lines) ──────────────────────────────────────────
 
@@ -118,17 +123,17 @@ export function Navbar() {
       <ul className="hidden md:flex items-center gap-10">
         {NAV_LINKS.map((link, i) => (
           <motion.li
-            key={link}
+            key={link.label}
             variants={fadeIn}
             initial="hidden"
             animate="visible"
             custom={i * 0.6 + 0.1}
           >
             <a
-              href={`#${link.toLowerCase()}`}
+              href={link.href}
               className="font-mono text-[14px] tracking-[0.2em] text-ash/50 hover:text-bone transition-colors duration-300"
             >
-              [ {link} ]
+              [ {link.label} ]
             </a>
           </motion.li>
         ))}

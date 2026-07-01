@@ -1,12 +1,10 @@
 import { motion } from "framer-motion";
 
 /* ── Palette ─────────────────────────────────────────────────────────────────── */
-const VOID     = "var(--color-void)";
 const BONE     = "var(--color-bone)";
 const ASH      = "var(--color-ash)";
 const DIM      = "var(--color-dim)";
 const IRON     = "var(--color-iron)";
-const SMOKE    = "var(--color-smoke)";
 const GRAPHITE = "var(--color-graphite)";
 const PLATE    = "var(--color-plate)";
 const SURFACE  = "var(--color-surface)";
@@ -37,344 +35,284 @@ export default function ProjectCard({ project, direction }) {
         width: "100%",
         background: SURFACE,
         border: `1px solid ${GRAPHITE}`,
-        borderTop: `2px solid ${ARTERIAL}`,
         display: "grid",
-        gridTemplateColumns: "1.1fr 0.9fr",
-        minHeight: "62vh",
+        gridTemplateColumns: "1.15fr 0.85fr",
+        minHeight: "60vh",
         overflow: "hidden",
-        position: "relative",
       }}
     >
+
       {/* ══════════════════════════════════════════════════════
-          LEFT — narrative content
+          LEFT — title, description
       ══════════════════════════════════════════════════════ */}
       <div style={{
-        padding: "40px 36px",
+        padding: "28px 32px 32px",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
         borderRight: `1px solid ${GRAPHITE}`,
-        overflowY: "auto",
       }}>
-        <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
 
-          {/* Tag + counter */}
+        {/* Top meta row */}
+        <div>
           <div style={{
             display: "flex",
             justifyContent: "space-between",
-            alignItems: "center",
-            fontFamily: MONO,
-            fontSize: "10px",
-            color: IRON,
-            letterSpacing: "0.18em",
-            textTransform: "uppercase",
+            alignItems: "flex-start",
+            marginBottom: "22px",
           }}>
-            <span>/ {project.tag}</span>
-            <span style={{ color: GRAPHITE }}>{project.index} / {String(CARD_COUNT).padStart(2, "0")}</span>
+            <div style={{ display: "flex", flexDirection: "column", gap: "3px" }}>
+              <span style={{
+                fontFamily: MONO,
+                fontSize: "10px",
+                color: SIGNAL,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+              }}>PROJECT_LOG_V{project.index}.0</span>
+              <span style={{
+                fontFamily: MONO,
+                fontSize: "10px",
+                color: IRON,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+              }}>TIMESTAMP: {project.year}</span>
+            </div>
+            <span style={{
+              fontFamily: MONO,
+              fontSize: "10px",
+              color: IRON,
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              textAlign: "right",
+            }}>{project.tag.replace("·", "//")}</span>
           </div>
 
-          {/* Categories */}
-          <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+          {/* Category pills */}
+          <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginBottom: "22px" }}>
             {project.categories.map((cat) => (
               <span key={cat} style={{
                 fontFamily: MONO,
                 fontSize: "9px",
-                letterSpacing: "0.1em",
-                color: DIM,
+                letterSpacing: "0.08em",
+                color: ASH,
                 border: `1px solid ${GRAPHITE}`,
-                padding: "3px 8px",
+                padding: "4px 10px",
                 textTransform: "uppercase",
               }}>{cat}</span>
             ))}
           </div>
 
-          {/* Title */}
+          {/* Giant title */}
           <h3 style={{
             fontFamily: SANS,
             fontWeight: 900,
-            fontSize: "clamp(28px, 3.5vw, 52px)",
+            fontSize: "clamp(44px, 6.5vw, 88px)",
             color: BONE,
             letterSpacing: "-0.04em",
-            lineHeight: 1.0,
-            margin: 0,
+            lineHeight: 0.92,
+            margin: "0 0 18px 0",
             whiteSpace: "pre-line",
           }}>{project.title}</h3>
 
-          {/* Serif connective */}
-          <span style={{
-            fontFamily: SERIF,
-            fontStyle: "italic",
-            fontWeight: 400,
-            fontSize: "15px",
-            color: ASH,
-            letterSpacing: "-0.01em",
-          }}>delivered</span>
+          {/* Serif italic — dash + phrase */}
+          <div style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "12px",
+            marginBottom: "22px",
+          }}>
+            <div style={{ width: "28px", height: "1px", background: ARTERIAL, flexShrink: 0 }} />
+            <span style={{
+              fontFamily: SERIF,
+              fontStyle: "italic",
+              fontWeight: 400,
+              fontSize: "15px",
+              color: ASH,
+              letterSpacing: "-0.01em",
+            }}>{project.connective}</span>
+          </div>
 
           {/* Description */}
           <p style={{
             fontFamily: MONO,
             fontSize: "11px",
             color: DIM,
-            lineHeight: 1.8,
+            lineHeight: 1.85,
             margin: 0,
           }}>{project.description}</p>
-        </div>
-
-        {/* Bottom — metrics + stack + status */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "14px", marginTop: "28px" }}>
-
-          {/* Metrics */}
-          <div style={{
-            display: "flex",
-            gap: "28px",
-            paddingBottom: "14px",
-            borderBottom: `1px solid ${PLATE}`,
-          }}>
-            {project.metrics.map((m) => (
-              <div key={m.label} style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-                <span style={{
-                  fontFamily: SANS,
-                  fontWeight: 900,
-                  fontSize: "20px",
-                  color: BONE,
-                  letterSpacing: "-0.04em",
-                  lineHeight: 1,
-                }}>{m.val}</span>
-                <span style={{
-                  fontFamily: MONO,
-                  fontSize: "9px",
-                  color: IRON,
-                  letterSpacing: "0.12em",
-                  textTransform: "uppercase",
-                }}>{m.label}</span>
-              </div>
-            ))}
-          </div>
-
-          {/* Stack pills */}
-          <div style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}>
-            {project.stack.map((s) => (
-              <span key={s} style={{
-                fontFamily: MONO,
-                fontSize: "9px",
-                letterSpacing: "0.1em",
-                color: IRON,
-                border: `1px solid ${SMOKE}`,
-                padding: "3px 8px",
-                background: PLATE,
-                textTransform: "uppercase",
-              }}>{s}</span>
-            ))}
-          </div>
-
-          {/* Status + link */}
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <div style={{ width: "5px", height: "5px", borderRadius: "50%", background: SIGNAL }} />
-              <span style={{
-                fontFamily: MONO,
-                fontSize: "9px",
-                color: SIGNAL,
-                letterSpacing: "0.18em",
-                textTransform: "uppercase",
-              }}>{project.status}</span>
-            </div>
-            {project.link && (
-              <a
-                href={project.link}
-                target="_blank"
-                rel="noreferrer"
-                style={{
-                  fontFamily: MONO,
-                  fontSize: "10px",
-                  color: ARTERIAL,
-                  textDecoration: "none",
-                  letterSpacing: "0.15em",
-                  textTransform: "uppercase",
-                  borderBottom: `1px solid ${ARTERIAL}`,
-                  paddingBottom: "2px",
-                  cursor: "pointer",
-                }}
-              >VIEW SOURCE ↗</a>
-            )}
-          </div>
         </div>
       </div>
 
       {/* ══════════════════════════════════════════════════════
-          RIGHT — structured info panel (no dead space)
+          RIGHT — metrics / stack / status / CTA
       ══════════════════════════════════════════════════════ */}
       <div style={{
-        position: "relative",
-        background: "#0d0d12",
-        overflow: "hidden",
         display: "flex",
         flexDirection: "column",
+        background: "#0a0a0f",
       }}>
-        {/* Dot grid bg */}
-        <svg
-          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", opacity: 0.35 }}
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <pattern id={`dots-${project.index}`} x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-              <circle cx="1" cy="1" r="0.8" fill={PLATE} />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill={`url(#dots-${project.index})`} />
-        </svg>
 
-        {/* Ghost giant index — background watermark */}
-        <span style={{
-          position: "absolute",
-          bottom: "-0.1em",
-          right: "-0.05em",
-          fontFamily: SANS,
-          fontWeight: 900,
-          fontSize: "clamp(140px, 20vw, 260px)",
-          WebkitTextFillColor: "transparent",
-          WebkitTextStroke: `1px ${GRAPHITE}`,
-          letterSpacing: "-0.06em",
-          lineHeight: 1,
-          userSelect: "none",
-          zIndex: 0,
-          opacity: 0.5,
-        }}>{project.index}</span>
-
-        {/* Top label */}
+        {/* ── Metrics — flush top, divided columns ────────── */}
         <div style={{
-          position: "relative",
-          zIndex: 2,
-          padding: "20px 24px 0",
-          fontFamily: MONO,
-          fontSize: "9px",
-          color: GRAPHITE,
-          letterSpacing: "0.18em",
-          textTransform: "uppercase",
-        }}>/ DSGN {project.index}</div>
-
-        {/* ── Structured content area ── */}
-        <div style={{
-          position: "relative",
-          zIndex: 2,
-          flex: 1,
-          display: "flex",
-          flexDirection: "column",
-          padding: "24px 24px 32px",
-          gap: "0",
+          display: "grid",
+          gridTemplateColumns: `repeat(${project.metrics.length}, 1fr)`,
+          borderBottom: `1px solid ${GRAPHITE}`,
+          flexShrink: 0,
         }}>
+          {project.metrics.map((m, i) => (
+            <div key={m.label} style={{
+              padding: "22px 24px 18px",
+              borderRight: i < project.metrics.length - 1 ? `1px solid ${GRAPHITE}` : "none",
+            }}>
+              <div style={{
+                fontFamily: SANS,
+                fontWeight: 900,
+                fontSize: "clamp(26px, 3.5vw, 44px)",
+                color: ARTERIAL,
+                letterSpacing: "-0.03em",
+                lineHeight: 1,
+                marginBottom: "5px",
+              }}>{m.val}</div>
+              <div style={{
+                fontFamily: MONO,
+                fontSize: "8px",
+                color: IRON,
+                letterSpacing: "0.15em",
+                textTransform: "uppercase",
+              }}>{m.label.replace(/ /g, "_")}</div>
+            </div>
+          ))}
+        </div>
 
-          {/* Editorial index + title block */}
+        {/* ── Stack list ───────────────────────────────────── */}
+        <div style={{
+          flex: 1,
+          padding: "16px 24px",
+          borderBottom: `1px solid ${GRAPHITE}`,
+          overflowY: "auto",
+        }}>
+          {/* Section label */}
           <div style={{
-            borderBottom: `1px solid ${GRAPHITE}`,
-            paddingBottom: "20px",
-            marginBottom: "0",
+            display: "flex",
+            alignItems: "center",
+            gap: "8px",
+            marginBottom: "12px",
           }}>
-            <div style={{
+            <div style={{ width: "5px", height: "5px", background: SIGNAL, flexShrink: 0 }} />
+            <span style={{
               fontFamily: MONO,
               fontSize: "9px",
-              color: IRON,
+              color: SIGNAL,
               letterSpacing: "0.18em",
               textTransform: "uppercase",
-              marginBottom: "8px",
-            }}>PROJECT INDEX</div>
-            <div style={{
-              fontFamily: SANS,
-              fontWeight: 900,
-              fontSize: "clamp(22px, 3vw, 40px)",
-              color: BONE,
-              letterSpacing: "-0.04em",
-              lineHeight: 1.0,
-              whiteSpace: "pre-line",
-            }}>{project.title}</div>
+            }}>ARCHITECTURE_STACK</span>
           </div>
 
-          {/* Stack list — vertical, one per row with hairlines */}
+          {project.stack.map((s, i) => (
+            <div key={s} style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              padding: "8px 0",
+              borderTop: `1px solid ${PLATE}`,
+            }}>
+              <span style={{
+                fontFamily: MONO,
+                fontSize: "10px",
+                color: ASH,
+                letterSpacing: "0.04em",
+              }}>{s}</span>
+              <span style={{
+                fontFamily: MONO,
+                fontSize: "9px",
+                color: GRAPHITE,
+                letterSpacing: "0.08em",
+              }}>[{String(i + 1).padStart(2, "0")}]</span>
+            </div>
+          ))}
+        </div>
+
+        {/* ── Status + CTA ─────────────────────────────────── */}
+        <div style={{
+          padding: "16px 24px 24px",
+          display: "flex",
+          flexDirection: "column",
+          gap: "12px",
+          flexShrink: 0,
+        }}>
+          {/* Status row */}
           <div style={{
-            flex: 1,
-            overflowY: "auto",
-            borderBottom: `1px solid ${GRAPHITE}`,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
           }}>
-            <div style={{
+            <div style={{ display: "flex", alignItems: "center", gap: "7px" }}>
+              <div style={{ width: "5px", height: "5px", background: SIGNAL, flexShrink: 0 }} />
+              <span style={{
+                fontFamily: MONO,
+                fontSize: "9px",
+                color: SIGNAL,
+                letterSpacing: "0.15em",
+                textTransform: "uppercase",
+              }}>SYSTEM_{project.status}</span>
+            </div>
+            <span style={{
               fontFamily: MONO,
               fontSize: "9px",
               color: IRON,
-              letterSpacing: "0.18em",
+              letterSpacing: "0.12em",
               textTransform: "uppercase",
-              padding: "14px 0 10px",
-            }}>STACK</div>
-            {project.stack.map((s, i) => (
-              <div key={s} style={{
+            }}>V{project.index}.0_STABLE</span>
+          </div>
+
+          {/* CTA */}
+          {project.link ? (
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noreferrer"
+              style={{
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
-                padding: "9px 0",
-                borderTop: i === 0 ? `1px solid ${GRAPHITE}` : `1px solid ${PLATE}`,
-              }}>
-                <span style={{
-                  fontFamily: MONO,
-                  fontSize: "10px",
-                  color: ASH,
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
-                }}>{s}</span>
-                <span style={{
-                  fontFamily: MONO,
-                  fontSize: "9px",
-                  color: GRAPHITE,
-                  letterSpacing: "0.1em",
-                }}>{String(i + 1).padStart(2, "0")}</span>
-              </div>
-            ))}
-          </div>
-
-          {/* Categories row */}
-          <div style={{ paddingTop: "16px" }}>
+                padding: "13px 16px",
+                border: `1px solid ${ARTERIAL}`,
+                textDecoration: "none",
+                background: "transparent",
+                cursor: "pointer",
+                transition: "background 0.2s",
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.background = "rgba(254,30,52,0.07)"}
+              onMouseLeave={(e) => e.currentTarget.style.background = "transparent"}
+            >
+              <span style={{
+                fontFamily: MONO,
+                fontSize: "10px",
+                color: BONE,
+                letterSpacing: "0.16em",
+                textTransform: "uppercase",
+              }}>ACCESS_REPOSITORY</span>
+              <span style={{ color: ARTERIAL, fontSize: "14px", lineHeight: 1 }}>→</span>
+            </a>
+          ) : (
             <div style={{
-              fontFamily: MONO,
-              fontSize: "9px",
-              color: IRON,
-              letterSpacing: "0.18em",
-              textTransform: "uppercase",
-              marginBottom: "10px",
-            }}>SCOPE</div>
-            <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-              {project.categories.map((cat, i) => (
-                <div key={cat} style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "10px",
-                }}>
-                  <div style={{
-                    width: "3px",
-                    height: "3px",
-                    background: i === 0 ? ARTERIAL : GRAPHITE,
-                    flexShrink: 0,
-                  }} />
-                  <span style={{
-                    fontFamily: MONO,
-                    fontSize: "9px",
-                    color: i === 0 ? ASH : DIM,
-                    letterSpacing: "0.12em",
-                    textTransform: "uppercase",
-                  }}>{cat}</span>
-                </div>
-              ))}
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              padding: "13px 16px",
+              border: `1px solid ${GRAPHITE}`,
+            }}>
+              <span style={{
+                fontFamily: MONO,
+                fontSize: "10px",
+                color: IRON,
+                letterSpacing: "0.16em",
+                textTransform: "uppercase",
+              }}>INTERNAL_PROJECT</span>
+              <span style={{ color: GRAPHITE, fontSize: "14px", lineHeight: 1 }}>—</span>
             </div>
-          </div>
+          )}
         </div>
-
-        {/* Arterial left border accent — solid 1px, no gradient */}
-        <div style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "1px",
-          height: "100%",
-          background: ARTERIAL,
-          opacity: 0.25,
-          zIndex: 3,
-        }} />
       </div>
     </motion.div>
   );
