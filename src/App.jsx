@@ -5,6 +5,8 @@ import Hero, { Navbar } from "./components/hero";
 import About from "./components/about";
 import Work from "./components/Work";
 import Projects from "./components/Projects";
+import Skills from "./components/Skills"
+import 'devicon/devicon.min.css';
 
 export default function App() {
   const [preloaderDone, setPreloaderDone] = useState(false);
@@ -24,6 +26,7 @@ export default function App() {
           <About />
           <Work />
           <Projects />
+          <Skills />
         </>
       )}
     </div>
