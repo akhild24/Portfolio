@@ -152,12 +152,7 @@ export function Navbar() {
           <SignalDot />
           <UptimeTicker />
         </div>
-        <a
-          href="mailto:akhildwivedi453@gmail.com"
-          className="font-mono text-[14px] tracking-[0.16em] text-bone border-b border-iron pb-px hover:border-bone transition-colors duration-300"
-        >
-          CONTACT ↗
-        </a>
+        
       </motion.div>
     </nav>
   );

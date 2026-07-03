@@ -34,12 +34,9 @@ const SURFACE = "var(--color-surface)";
 const PLATE = "var(--color-plate)";
 const SMOKE = "var(--color-smoke)";
 const GRAPHITE = "var(--color-graphite)";
-const LINEN = "var(--color-linen)";
 const BONE = "var(--color-bone)";
 const ASH = "var(--color-ash)";
 const DIM = "var(--color-dim)";
-const IRON = "var(--color-iron)";
-const INK = "var(--color-ink)";
 const SIGNAL = "var(--color-signal)";
 const ARTERIAL = "#fe1e34";
 
@@ -277,7 +274,13 @@ const DomainRow = ({ domain, index }) => {
         className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-3"
       >
         {domain.skills.map((skill) => (
-          <SkillIcon key={skill.label} label={skill.label} iconClass={skill.iconClass} lucide={skill.lucide} accent={domain.accent} />
+          <SkillIcon
+            key={skill.label}
+            label={skill.label}
+            iconClass={skill.iconClass}
+            lucide={skill.lucide}
+            accent={domain.accent}
+          />
         ))}
       </div>
     </motion.div>
@@ -294,71 +297,118 @@ export default function Skills() {
       id="skills"
       style={{ background: VOID, paddingBottom: "120px" }}
     >
-      {/* linen header */}
+      {/* ── SECTION HEADER (dark void pattern) ──────────────────────────── */}
       <div
         style={{
-          background: LINEN,
-          padding: "48px clamp(24px, 6vw, 100px) 40px",
-          borderBottom: `1px solid ${ASH}`,
-          display: "flex",
-          alignItems: "flex-end",
-          justifyContent: "space-between",
-          gap: "24px",
-          flexWrap: "wrap",
+          background: VOID,
+          padding: "80px clamp(24px, 6vw, 100px) 0",
         }}
       >
-        <motion.div
-          ref={titleRef}
-          initial={{ clipPath: "inset(0 0 100% 0)" }}
-          animate={titleInView ? { clipPath: "inset(0 0 0% 0)" } : {}}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <h2
-            style={{
-              fontFamily: "var(--font-sans)",
-              fontWeight: 900,
-              fontSize: "clamp(40px, 6vw, 80px)",
-              letterSpacing: "-0.04em",
-              color: INK,
-              lineHeight: 1,
-              margin: 0,
-            }}
-          >
-            SK
-            <span style={{
-              WebkitTextFillColor: "transparent",
-              WebkitTextStroke: `2px ${INK}`,
-            }}>ILLS</span>
-          </h2>
-          <p
-            style={{
-              fontFamily: "var(--font-serif)",
-              fontStyle: "italic",
-              fontSize: "clamp(14px, 2vw, 20px)",
-              color: IRON,
-              margin: "8px 0 0",
-            }}
-          >
-            tools I build with
-          </p>
-        </motion.div>
-
+        {/* eyebrow */}
         <div
           style={{
-            fontFamily: "var(--font-mono)",
-            fontSize: "10px",
-            color: IRON,
-            letterSpacing: "0.15em",
-            textAlign: "right",
-            lineHeight: 2.2,
+            display: "flex",
+            alignItems: "center",
+            gap: "10px",
+            marginBottom: "28px",
           }}
         >
-          <div>5 DOMAINS</div>
-          <div style={{ color: INK, fontWeight: 700 }}>35+ TOOLS</div>
+          <span
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: "10px",
+              letterSpacing: "0.22em",
+              color: DIM,
+              textTransform: "uppercase",
+            }}
+          >
+            [ SECTION / 03 ]
+          </span>
+          <div style={{ flex: 1, height: "1px", background: PLATE }} />
         </div>
+
+        {/* headline row */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "flex-end",
+            justifyContent: "space-between",
+            gap: "32px",
+            flexWrap: "wrap",
+          }}
+        >
+          {/* left — giant headline + serif caption */}
+          <motion.div
+            ref={titleRef}
+            initial={{ clipPath: "inset(0 0 100% 0)" }}
+            animate={titleInView ? { clipPath: "inset(0 0 0% 0)" } : {}}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <h2
+              style={{
+                fontFamily: "var(--font-sans)",
+                fontWeight: 900,
+                fontSize: "clamp(64px, 13vw, 195px)",
+                letterSpacing: "-0.06em",
+                color: BONE,
+                lineHeight: 0.9,
+                margin: 0,
+              }}
+            >
+              SK
+              <span
+                style={{
+                  WebkitTextFillColor: "transparent",
+                  WebkitTextStroke: `1.5px ${BONE}`,
+                }}
+              >
+                ILLS
+              </span>
+            </h2>
+            <p
+              style={{
+                fontFamily: "var(--font-serif)",
+                fontStyle: "italic",
+                fontSize: "clamp(14px, 2vw, 22px)",
+                color: DIM,
+                margin: "14px 0 0",
+                letterSpacing: "0.01em",
+              }}
+            >
+              tools I build with
+            </p>
+          </motion.div>
+
+          {/* right — mono metadata with signal green accent line */}
+          <div
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: "10px",
+              letterSpacing: "0.15em",
+              color: DIM,
+              textAlign: "right",
+              lineHeight: 2.2,
+              borderRight: `2px solid ${SIGNAL}`,
+              paddingRight: "14px",
+              flexShrink: 0,
+            }}
+          >
+            <div>5 DOMAINS</div>
+            <div style={{ color: BONE, fontWeight: 700 }}>35+ TOOLS</div>
+          </div>
+        </div>
+
+        {/* full-bleed hairline — arterial red left → graphite */}
+        <div
+          style={{
+            marginTop: "40px",
+            height: "1px",
+            background: `linear-gradient(to right, ${ARTERIAL} 80px, ${GRAPHITE} 80px)`,
+          }}
+        />
       </div>
 
-      {/* domain rows */}
+      {/* ── DOMAIN ROWS ──────────────────────────────────────────────────── */}
       <div
         style={{
           background: VOID,
@@ -378,4 +428,4 @@ export default function Skills() {
       </div>
     </section>
   );
-}
+}
