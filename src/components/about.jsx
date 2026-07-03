@@ -1,42 +1,13 @@
-import { useRef, useEffect, useState, useCallback } from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import Akhil from "../assets/me.png";
+import { useRef } from "react";
+import { motion, useScroll, useTransform, useSpring, useInView } from "framer-motion";
+import Akhil from "../assets/me.jpeg";
 import CircuitBoard from "./CircuitBoard";
-
-function useInView(threshold = 0.05) {
-  const ref = useRef(null);
-  const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) setVisible(true); },
-      { threshold }
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, [threshold]);
-  return [ref, visible];
-}
-
-/* ── Palette — all values reference CSS variables from index.css @theme ── */
-const VOID   = "var(--color-void)";
-const BONE   = "var(--color-bone)";
-const ASH    = "var(--color-ash)";
-const DIM    = "var(--color-dim)";
-const IRON   = "var(--color-iron)";
-const INK    = "var(--color-ink)";
-const LINEN  = "var(--color-linen)";
-const SMOKE  = "var(--color-smoke)";
-const PLATE  = "var(--color-plate)";
-const SIGNAL = "var(--color-signal)";
-const MONO   = "var(--font-mono)";
-const SANS   = "var(--font-sans)";
-const SERIF  = "var(--font-serif)";
+import { VOID, BONE, ASH, DIM, IRON, INK, LINEN, SMOKE, PLATE, SIGNAL, MONO, SANS, SERIF } from "../theme";
 
 // ─── PANEL 1 — Title (linen inverted surface) ──────────────────────────────
 function TitlePanel() {
-  const [ref, visible] = useInView(0.25);
+  const ref = useRef(null);
+  const visible = useInView(ref, { once: true, amount: 0.25 });
   return (
     <div
       ref={ref}
@@ -129,8 +100,8 @@ const LINES = [
 ];
 
 function ManifestoPanel() {
-  const [ref, visible] = useInView(0.15);
   const panelRef = useRef(null);
+  const visible = useInView(panelRef, { once: true, amount: 0.15 });
 
   const { scrollYProgress } = useScroll({
     target: panelRef,
@@ -147,14 +118,9 @@ function ManifestoPanel() {
   const opacity = useTransform(smoothProgress, [0.15, 0.35, 0.65, 0.85], [0, 1, 1, 0]);
   const y = useTransform(smoothProgress, [0.15, 0.35, 0.65, 0.85], [80, 0, 0, -80]);
 
-  const setRefs = useCallback((node) => {
-    ref.current = node;
-    panelRef.current = node;
-  }, [ref]);
-
   return (
     <div
-      ref={setRefs}
+      ref={panelRef}
       style={{
         background: VOID,
         width: "100%",
@@ -244,18 +210,7 @@ function ManifestoPanel() {
 // ─── PANEL 3 — Photo wipe + bio + circuit board (void canvas) ──────────────
 function BioPanel() {
   const panelRef = useRef(null);
-  const [entered, setEntered] = useState(false);
-
-  useEffect(() => {
-    const el = panelRef.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) setEntered(true); },
-      { threshold: 0.01 }
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
+  const entered = useInView(panelRef, { once: true, amount: 0.01 });
 
   const { scrollYProgress } = useScroll({
     target: panelRef,

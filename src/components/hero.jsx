@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import Akhil from "../assets/me.png";
+import Akhil from "../assets/me.jpeg";
 
 // ─── animation config ────────────────────────────────────────────────────────
 

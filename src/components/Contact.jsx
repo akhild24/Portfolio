@@ -3,18 +3,6 @@ import { motion, useInView } from "framer-motion";
 
 const EASE = [0.16, 1, 0.3, 1];
 
-const ClipReveal = ({ children, delay = 0 }) => (
-  <div style={{ overflow: "hidden" }}>
-    <motion.div
-      initial={{ y: "100%" }}
-      animate={{ y: "0%" }}
-      transition={{ duration: 0.9, ease: EASE, delay }}
-    >
-      {children}
-    </motion.div>
-  </div>
-);
-
 export default function Contact() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-10%" });

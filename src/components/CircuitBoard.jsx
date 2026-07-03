@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
+import { useInView } from "framer-motion";
 
 // ─── DevOps Pipeline Circuit Board ───────────────────────────────────────────
-// Pure SVG + CSS animations. No external deps beyond React.
-// Themed to the Operational Editorial design system.
+// Pure SVG + CSS animations. Uses framer-motion only for viewport detection.
 
 const COLORS = {
   void:     "#080808",     // void-canvas
@@ -209,18 +209,7 @@ function CircuitNode({ node, visible, index }) {
 
 export default function CircuitBoard() {
   const ref = useRef(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) setVisible(true); },
-      { threshold: 0.15 }
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
+  const visible = useInView(ref, { once: true, amount: 0.15 });
 
   // Build a lookup for quick node access
   const nodeMap = {};

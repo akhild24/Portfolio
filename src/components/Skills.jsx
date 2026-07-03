@@ -28,17 +28,7 @@ const lucideIcons = {
   Terminal: Terminal,
 };
 
-// ── DESIGN SYSTEM VARIABLES ───────────────────────────────────────────────────
-const VOID = "var(--color-void)";
-const SURFACE = "var(--color-surface)";
-const PLATE = "var(--color-plate)";
-const SMOKE = "var(--color-smoke)";
-const GRAPHITE = "var(--color-graphite)";
-const BONE = "var(--color-bone)";
-const ASH = "var(--color-ash)";
-const DIM = "var(--color-dim)";
-const SIGNAL = "var(--color-signal)";
-const ARTERIAL = "#fe1e34";
+import { VOID, SURFACE, PLATE, SMOKE, GRAPHITE, BONE, ASH, DIM, SIGNAL, ARTERIAL } from "../theme";
 
 // ── SKILL ICON COMPONENT ──────────────────────────────────────────────────────
 const SkillIcon = ({ label, iconClass, lucide, accent }) => {
@@ -167,6 +157,7 @@ const domains = [
     accent: ASH,
     skills: [
       { label: "PostgreSQL", iconClass: "devicon-postgresql-plain" },
+      { label: "MySQL", iconClass: "devicon-mysql-plain" },
       { label: "MongoDB", iconClass: "devicon-mongodb-plain" },
       { label: "Git", iconClass: "devicon-git-plain" },
       { label: "Postman", iconClass: "devicon-postman-plain" },

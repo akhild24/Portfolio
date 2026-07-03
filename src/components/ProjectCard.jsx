@@ -1,20 +1,5 @@
 import { motion } from "framer-motion";
-
-/* ── Palette ─────────────────────────────────────────────────────────────────── */
-const BONE     = "var(--color-bone)";
-const ASH      = "var(--color-ash)";
-const DIM      = "var(--color-dim)";
-const IRON     = "var(--color-iron)";
-const GRAPHITE = "var(--color-graphite)";
-const PLATE    = "var(--color-plate)";
-const SURFACE  = "var(--color-surface)";
-const SIGNAL   = "var(--color-signal)";
-const MONO     = "var(--font-mono)";
-const SANS     = "var(--font-sans)";
-const SERIF    = "var(--font-serif)";
-const ARTERIAL = "#fe1e34";
-
-const CARD_COUNT = 6;
+import { BONE, ASH, DIM, IRON, GRAPHITE, PLATE, SURFACE, SIGNAL, MONO, SANS, SERIF, ARTERIAL } from "../theme";
 
 const variants = {
   enter:  (dir) => ({ x: dir > 0 ? "100%" : "-100%", opacity: 0 }),

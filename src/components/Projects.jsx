@@ -1,18 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { AnimatePresence } from "framer-motion";
 import ProjectCard from "./ProjectCard";
-
-/* ── Palette ─────────────────────────────────────────────────────────────────── */
-const VOID     = "var(--color-void)";
-const BONE     = "var(--color-bone)";
-const IRON     = "var(--color-iron)";
-const GRAPHITE = "var(--color-graphite)";
-const DIM      = "var(--color-dim)";
-const ASH      = "var(--color-ash)";
-const MONO     = "var(--font-mono)";
-const SANS     = "var(--font-sans)";
-const SERIF    = "var(--font-serif)";
-const ARTERIAL = "#fe1e34";
+import { VOID, BONE, IRON, GRAPHITE, DIM, ASH, MONO, SANS, SERIF, ARTERIAL } from "../theme";
 
 const INTERVAL = 30000;
 

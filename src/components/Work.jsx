@@ -1,22 +1,5 @@
 import logo47B from "../assets/logo.png";
-
-/* ── Palette — referencing CSS vars from index.css @theme ──────────────────── */
-
-const VOID     = "var(--color-void)";
-const BONE     = "var(--color-bone)";
-const ASH      = "var(--color-ash)";
-const DIM      = "var(--color-dim)";
-const IRON     = "var(--color-iron)";
-const SMOKE    = "var(--color-smoke)";
-const GRAPHITE = "var(--color-graphite)";
-const PLATE    = "var(--color-plate)";
-const SURFACE  = "var(--color-surface)";
-const MONO     = "var(--font-mono)";
-const SANS     = "var(--font-sans)";
-const SERIF    = "var(--font-serif)";
-const SIGNAL   = "var(--color-signal)";
-
-const ARTERIAL = "#fe1e34";
+import { VOID, BONE, ASH, DIM, IRON, SMOKE, GRAPHITE, PLATE, SURFACE, MONO, SANS, SERIF, SIGNAL, ARTERIAL } from "../theme";
 
 /* ═══════════════════════════════════════════════════════════════════════════════
    ROLE CARD — top-right context block
@@ -361,7 +344,7 @@ function CardHeader({ module, icon, featured = false }) {
       <span
         style={{
           fontSize: "14px",
-          color: featured ? ARTERIAL : ARTERIAL,
+          color: ARTERIAL,
           opacity: featured ? 1 : 0.6,
         }}
       >
