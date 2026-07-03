@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useCallback } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import Akhil from "../assets/me.png";
 import CircuitBoard from "./CircuitBoard";
@@ -43,11 +43,13 @@ function TitlePanel() {
       style={{
         background: LINEN,
         width: "100%",
-        height: "70vh",
+        height: "100vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        position: "relative",
+        position: "sticky",
+        top: 0,
+        zIndex: 1,
         overflow: "hidden",
       }}
     >
@@ -128,13 +130,42 @@ const LINES = [
 
 function ManifestoPanel() {
   const [ref, visible] = useInView(0.15);
+  const panelRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: panelRef,
+    offset: ["start end", "end start"],
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 80,
+    damping: 24,
+    restDelta: 0.001,
+  });
+
+  // Smooth fade-in/out and translate quote based on scroll position
+  const opacity = useTransform(smoothProgress, [0.15, 0.35, 0.65, 0.85], [0, 1, 1, 0]);
+  const y = useTransform(smoothProgress, [0.15, 0.35, 0.65, 0.85], [80, 0, 0, -80]);
+
+  const setRefs = useCallback((node) => {
+    ref.current = node;
+    panelRef.current = node;
+  }, [ref]);
+
   return (
     <div
-      ref={ref}
+      ref={setRefs}
       style={{
-        background: VOID, width: "100%", minHeight: "100vh",
-        display: "flex", flexDirection: "column", justifyContent: "center",
-        padding: "80px 40px", boxSizing: "border-box", position: "relative",
+        background: VOID,
+        width: "100%",
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        padding: "80px 40px",
+        boxSizing: "border-box",
+        position: "relative",
+        zIndex: 2,
       }}
     >
       {/* panel number */}
@@ -167,13 +198,10 @@ function ManifestoPanel() {
         }}
       />
 
-      <div>
+      <motion.div style={{ opacity, y }}>
         {LINES.map((line, i) => (
           <div key={i} style={{ overflow: "hidden", lineHeight: 1.02 }}>
-            <motion.div
-              initial={{ y: "105%" }}
-              animate={visible ? { y: "0%" } : {}}
-              transition={{ duration: 0.7, delay: 0.15 + i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+            <div
               style={{
                 display: "flex",
                 alignItems: "baseline",
@@ -205,10 +233,10 @@ function ManifestoPanel() {
                   {line.serifWord}
                 </span>
               )}
-            </motion.div>
+            </div>
           </div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 }
@@ -262,6 +290,7 @@ function BioPanel() {
         width: "100%",
         minHeight: "100vh",
         position: "relative",
+        zIndex: 3,
         boxSizing: "border-box",
         paddingBottom: 100,
       }}

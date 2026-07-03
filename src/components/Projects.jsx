@@ -51,22 +51,22 @@ const projects = [
     link: "https://github.com/akhild24/Argus_Ai",
   },
   {
-  index: "03",
-  year: "2025.Q1",
-  tag: "CLOUD · AWS EKS",
-  connective: "async, event-driven architecture",
-  categories: ["MICROSERVICES", "KUBERNETES", "RABBITMQ", "HELM"],
-  title: "MICRO\nSERVICES\nARCH",
-  description:
-    "Python microservices on AWS EKS — users authenticate via JWT, upload a video, which is queued through RabbitMQ and processed asynchronously by a converter service. MongoDB and PostgreSQL provisioned via Helm. Covers Kubernetes networking, IAM roles, stateful service management, and end-to-end async communication.",
-  stack: ["Python", "Docker", "Kubernetes", "Helm", "EKS", "RabbitMQ", "MongoDB", "PostgreSQL", "JWT"],
-  metrics: [
-    { val: "4",    label: "Microservices" },
-    { val: "Async", label: "RabbitMQ Queue" },
-  ],
-  status: "COMPLETED",
-  link: "https://github.com/akhild24",
-},
+    index: "03",
+    year: "2025.Q1",
+    tag: "CLOUD · AWS EKS",
+    connective: "async, event-driven architecture",
+    categories: ["MICROSERVICES", "KUBERNETES", "RABBITMQ", "HELM"],
+    title: "MICRO\nSERVICES\nARCH",
+    description:
+      "Python microservices on AWS EKS — users authenticate via JWT, upload a video, which is queued through RabbitMQ and processed asynchronously by a converter service. MongoDB and PostgreSQL provisioned via Helm. Covers Kubernetes networking, IAM roles, stateful service management, and end-to-end async communication.",
+    stack: ["Python", "Docker", "Kubernetes", "Helm", "EKS", "RabbitMQ", "MongoDB", "PostgreSQL", "JWT"],
+    metrics: [
+      { val: "4",    label: "Microservices" },
+      { val: "Async", label: "RabbitMQ Queue" },
+    ],
+    status: "COMPLETED",
+    link: "https://github.com/akhild24",
+  },
   {
     index: "04",
     year: "2025.Q2",
@@ -102,7 +102,7 @@ const projects = [
     link: "https://github.com/akhild24/finalai",
   },
   {
-    index: "03",
+    index: "06",
     year: "2025.Q2",
     tag: "INTERNSHIP · 47BILLION",
     connective: "engineered at scale",
@@ -122,9 +122,6 @@ const projects = [
 
 const CARD_COUNT = projects.length;
 
-/* ═══════════════════════════════════════════════════════════════════════════════
-   Projects
-   ═══════════════════════════════════════════════════════════════════════════════ */
 export default function Projects() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [direction, setDirection]     = useState(1);

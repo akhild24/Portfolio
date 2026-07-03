@@ -163,6 +163,7 @@ export function Navbar() {
 export default function Hero() {
   return (
     <section
+      id="hero"
       className="relative w-full min-h-screen overflow-hidden select-none bg-void"
     >
       {/* nav is now rendered at App level as a fixed element */}

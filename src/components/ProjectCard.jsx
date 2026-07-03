@@ -37,7 +37,7 @@ export default function ProjectCard({ project, direction }) {
         border: `1px solid ${GRAPHITE}`,
         display: "grid",
         gridTemplateColumns: "1.15fr 0.85fr",
-        minHeight: "60vh",
+        height: "580px",
         overflow: "hidden",
       }}
     >
@@ -51,6 +51,7 @@ export default function ProjectCard({ project, direction }) {
         flexDirection: "column",
         justifyContent: "space-between",
         borderRight: `1px solid ${GRAPHITE}`,
+        overflowY: "auto",
       }}>
 
         {/* Top meta row */}
@@ -149,7 +150,7 @@ export default function ProjectCard({ project, direction }) {
       <div style={{
         display: "flex",
         flexDirection: "column",
-        background: "#0a0a0f",
+        background: SURFACE,
       }}>
 
         {/* ── Metrics — flush top, divided columns ────────── */}

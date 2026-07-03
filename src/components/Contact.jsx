@@ -345,7 +345,7 @@ export default function Contact() {
           style={{
             backgroundColor: "var(--color-plate)",
             border: "1px solid var(--color-graphite)",
-            borderRadius: "8px",
+            borderRadius: "var(--radius-md)",
             padding: "clamp(24px, 3vw, 40px)",
           }}
         >
@@ -425,7 +425,7 @@ export default function Contact() {
                     width: "100%",
                     backgroundColor: "var(--color-surface)",
                     border: "1px solid var(--color-graphite)",
-                    borderRadius: "3px",
+                    borderRadius: "var(--radius-sm)",
                     padding: "12px 14px",
                     fontFamily: "var(--font-mono)",
                     fontSize: "12px",
@@ -465,7 +465,7 @@ export default function Contact() {
                   width: "100%",
                   backgroundColor: "var(--color-surface)",
                   border: "1px solid var(--color-graphite)",
-                  borderRadius: "3px",
+                  borderRadius: "var(--radius-sm)",
                   padding: "12px 14px",
                   fontFamily: "var(--font-mono)",
                   fontSize: "12px",
@@ -486,7 +486,7 @@ export default function Contact() {
               disabled={status === "sending" || status === "success"}
               whileHover={
                 status === "idle" || status === "error"
-                  ? { y: -2, backgroundColor: "#fcfcfc" }
+                  ? { y: -2, backgroundColor: "var(--color-bone)" }
                   : {}
               }
               whileTap={{ scale: 0.98 }}
@@ -500,12 +500,9 @@ export default function Contact() {
                     : status === "error"
                     ? "#fe1e34"
                     : "var(--color-bone)",
-                color:
-                  status === "success" || status === "error"
-                    ? "#080808"
-                    : "var(--color-ink)",
+                color: "var(--color-ink)",
                 border: "none",
-                borderRadius: "3px",
+                borderRadius: "var(--radius-sm)",
                 fontFamily: "var(--font-mono)",
                 fontSize: "11px",
                 fontWeight: 700,

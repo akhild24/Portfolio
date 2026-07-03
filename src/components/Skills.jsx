@@ -211,7 +211,7 @@ const DomainRow = ({ domain, index }) => {
       <div
         style={{
           padding: "28px 24px",
-          background: "rgba(10, 10, 14, 0.4)",
+          background: "color-mix(in srgb, var(--color-surface) 40%, transparent)",
           display: "flex",
           flexDirection: "column",
           gap: "10px",
