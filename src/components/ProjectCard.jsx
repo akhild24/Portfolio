@@ -127,7 +127,7 @@ export default function ProjectCard({ project, direction }) {
           <p style={{
             fontFamily: MONO,
             fontSize: "11px",
-            color: DIM,
+            color: ASH,
             lineHeight: 1.85,
             margin: 0,
           }}>{project.description}</p>
@@ -166,8 +166,8 @@ export default function ProjectCard({ project, direction }) {
               }}>{m.val}</div>
               <div style={{
                 fontFamily: MONO,
-                fontSize: "8px",
-                color: IRON,
+                fontSize: "10px",
+                color: ASH,
                 letterSpacing: "0.15em",
                 textTransform: "uppercase",
               }}>{m.label.replace(/ /g, "_")}</div>

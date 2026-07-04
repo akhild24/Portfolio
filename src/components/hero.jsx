@@ -11,11 +11,7 @@ const clipUp = {
   visible: (i = 0) => ({
     y: "0%",
     opacity: 1,
-    transition: {
-      duration: 0.75,
-      delay: i * STAGGER,
-      ease: [0.16, 1, 0.3, 1],
-    },
+    transition: { duration: 0.75, delay: i * STAGGER, ease: [0.16, 1, 0.3, 1] },
   }),
 };
 
@@ -23,38 +19,28 @@ const fadeIn = {
   hidden: { opacity: 0 },
   visible: (i = 0) => ({
     opacity: 1,
-    transition: {
-      duration: 0.6,
-      delay: i * STAGGER,
-      ease: "easeOut",
-    },
+    transition: { duration: 0.6, delay: i * STAGGER, ease: "easeOut" },
   }),
 };
 
 const photoReveal = {
-  hidden: { y: -32, opacity: 0 },
+  hidden: { y: -24, opacity: 0 },
   visible: {
     y: 0,
     opacity: 1,
-    transition: {
-      duration: 0.9,
-      delay: 0.55,
-      ease: [0.16, 1, 0.3, 1],
-    },
+    transition: { duration: 0.9, delay: 0.55, ease: [0.16, 1, 0.3, 1] },
   },
 };
 
-// ─── nav links ────────────────────────────────────────────────────────────────
+// ─── constants ────────────────────────────────────────────────────────────────
 
 const NAV_LINKS = [
-  { label: "ABOUT", href: "#about" },
-  { label: "WORK", href: "#work" },
+  { label: "ABOUT",    href: "#about"    },
+  { label: "WORK",     href: "#work"     },
   { label: "PROJECTS", href: "#projects" },
-  { label: "SKILLS", href: "#skills" },
-  { label: "CONTACT", href: "#contact" }
+  { label: "SKILLS",   href: "#skills"   },
+  { label: "CONTACT",  href: "#contact"  },
 ];
-
-// ─── slash list (real resume lines) ──────────────────────────────────────────
 
 const SLASH_LIST = [
   "/ DEVOPS & CLOUD ENGINEERING",
@@ -62,28 +48,23 @@ const SLASH_LIST = [
   "/ OBSERVABILITY PIPELINES",
 ];
 
-// ─── annotations ─────────────────────────────────────────────────────────────
-
 const BASED_IN   = "BASED IN INDORE, MP";
 const RECENT_TAG = "RECENT ROLE";
 const RECENT_VAL = "47BILLION — FULL STACK / RAG / VAPT";
 const AVAIL_TAG  = "OPEN TO INTERNSHIPS  ↘";
 const AVAIL_VAL  = "akhildwivedi453@gmail.com";
 
-// ─── live uptime ticker ───────────────────────────────────────────────────────
+// ─── uptime ticker ────────────────────────────────────────────────────────────
 
 function UptimeTicker() {
   const [elapsed, setElapsed] = useState(0);
-
   useEffect(() => {
     const id = setInterval(() => setElapsed((s) => s + 1), 1000);
     return () => clearInterval(id);
   }, []);
-
   const h = String(Math.floor(elapsed / 3600)).padStart(2, "0");
   const m = String(Math.floor((elapsed % 3600) / 60)).padStart(2, "0");
   const s = String(elapsed % 60).padStart(2, "0");
-
   return (
     <span className="font-mono text-[10px] tracking-[0.18em] text-dim">
       {h}:{m}:{s}
@@ -91,7 +72,7 @@ function UptimeTicker() {
   );
 }
 
-// ─── signal accent dot ───────────────────────────────────────────────────────
+// ─── signal dot ──────────────────────────────────────────────────────────────
 
 function SignalDot() {
   return (
@@ -103,7 +84,7 @@ function SignalDot() {
   );
 }
 
-// ─── mobile hamburger menu ───────────────────────────────────────────────────
+// ─── mobile menu ─────────────────────────────────────────────────────────────
 
 function MobileMenu({ isOpen, onClose }) {
   return (
@@ -137,262 +118,220 @@ function MobileMenu({ isOpen, onClose }) {
   );
 }
 
-// ─── navbar component (sticky, lives above all sections) ─────────────────────
+// ─── navbar ──────────────────────────────────────────────────────────────────
 
 export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-
   return (
     <>
-      <nav className="fixed top-0 left-2 right-2 z-50 flex items-center justify-between px-4 sm:px-10 py-4 sm:py-5 bg-void/80 backdrop-blur-md border-b border-bone/5 transition-all duration-300">
-        {/* wordmark */}
-        <motion.div
-          variants={fadeIn}
-          initial="hidden"
-          animate="visible"
-          custom={0}
-          className="font-mono text-[12px] sm:text-[14px] tracking-[0.14em] text-bone leading-tight"
-        >
+      <nav className="fixed top-0 left-2 right-2 z-50 flex items-center justify-between px-4 sm:px-10 py-4 sm:py-5 bg-void/80 backdrop-blur-md border-b border-bone/5">
+        <motion.div variants={fadeIn} initial="hidden" animate="visible" custom={0}
+          className="font-mono text-[12px] sm:text-[14px] tracking-[0.14em] text-bone leading-tight">
           <div>AKHIL</div>
           <div>DWIVEDI</div>
         </motion.div>
 
-        {/* center links — hidden on mobile */}
         <ul className="hidden md:flex items-center gap-10">
           {NAV_LINKS.map((link, i) => (
-            <motion.li
-              key={link.label}
-              variants={fadeIn}
-              initial="hidden"
-              animate="visible"
-              custom={i * 0.6 + 0.1}
-            >
-              <a
-                href={link.href}
-                className="font-mono text-[14px] tracking-[0.2em] text-ash/50 hover:text-bone transition-colors duration-300"
-              >
+            <motion.li key={link.label} variants={fadeIn} initial="hidden" animate="visible" custom={i * 0.6 + 0.1}>
+              <a href={link.href}
+                className="font-mono text-[14px] tracking-[0.2em] text-ash/50 hover:text-bone transition-colors duration-300">
                 [ {link.label} ]
               </a>
             </motion.li>
           ))}
         </ul>
 
-        {/* right — signal dot + uptime + hamburger */}
-        <motion.div
-          variants={fadeIn}
-          initial="hidden"
-          animate="visible"
-          custom={0.5}
-          className="flex items-center gap-4 sm:gap-6"
-        >
+        <motion.div variants={fadeIn} initial="hidden" animate="visible" custom={0.5}
+          className="flex items-center gap-4 sm:gap-6">
           <div className="flex items-center gap-2">
             <SignalDot />
             <UptimeTicker />
           </div>
-
-          {/* hamburger — visible only on mobile */}
-          <button
-            className="md:hidden flex flex-col gap-[5px] p-1"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
-          >
-            <motion.span
-              animate={menuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
-              className="block w-5 h-[1.5px] bg-bone origin-center transition-colors"
-            />
-            <motion.span
-              animate={menuOpen ? { opacity: 0 } : { opacity: 1 }}
-              className="block w-5 h-[1.5px] bg-bone"
-            />
-            <motion.span
-              animate={menuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
-              className="block w-5 h-[1.5px] bg-bone origin-center transition-colors"
-            />
+          <button className="md:hidden flex flex-col gap-[5px] p-1"
+            onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
+            <motion.span animate={menuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
+              className="block w-5 h-[1.5px] bg-bone origin-center" />
+            <motion.span animate={menuOpen ? { opacity: 0 } : { opacity: 1 }}
+              className="block w-5 h-[1.5px] bg-bone" />
+            <motion.span animate={menuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
+              className="block w-5 h-[1.5px] bg-bone origin-center" />
           </button>
         </motion.div>
       </nav>
-
       <MobileMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
     </>
   );
 }
 
-// ─── main component ───────────────────────────────────────────────────────────
+// ─── headline block (shared between mobile + desktop) ────────────────────────
+
+function HeadlineStack() {
+  return (
+    <div className="flex flex-col">
+      {/* DEVOPS */}
+      <div className="overflow-hidden">
+        <motion.h1
+          variants={clipUp} initial="hidden" animate="visible" custom={1}
+          className="font-sans font-black text-bone leading-none whitespace-nowrap"
+          style={{ fontSize: "clamp(48px, 13vw, 195px)", letterSpacing: "-0.06em" }}
+        >
+          DEVOPS
+        </motion.h1>
+      </div>
+
+      {/* engineering */}
+      <div className="overflow-hidden">
+        <motion.p
+          variants={clipUp} initial="hidden" animate="visible" custom={1.2}
+          className="font-serif italic font-normal text-ash leading-none"
+          style={{ fontSize: "clamp(20px, 3.2vw, 42px)", letterSpacing: "-0.02em", paddingLeft: "0.15em" }}
+        >
+          engineering
+        </motion.p>
+      </div>
+
+      {/* SYSTEMS outline */}
+      <div className="overflow-hidden">
+        <motion.h1
+          variants={clipUp} initial="hidden" animate="visible" custom={1.4}
+          className="font-sans font-black leading-none whitespace-nowrap"
+          style={{
+            fontSize: "clamp(48px, 13vw, 195px)",
+            letterSpacing: "-0.06em",
+            WebkitTextFillColor: "transparent",
+            WebkitTextStroke: "2px color-mix(in srgb, var(--color-bone) 50%, transparent)",
+          }}
+        >
+          SYSTEMS
+        </motion.h1>
+      </div>
+    </div>
+  );
+}
+
+// ─── photo block (shared between mobile + desktop) ────────────────────────────
+
+function PhotoBlock({ custom = 2.2, showBasedIn = true }) {
+  return (
+    <motion.div variants={photoReveal} initial="hidden" animate="visible">
+      {/* BASED IN label — only on desktop */}
+      {showBasedIn && (
+        <motion.p
+          variants={fadeIn} initial="hidden" animate="visible" custom={2.6}
+          className="font-mono text-[10px] tracking-[0.22em] text-dim mb-2"
+        >
+          {BASED_IN}
+        </motion.p>
+      )}
+
+      {/* photo */}
+      <div className="w-full bg-surface border border-bone/10 overflow-hidden" style={{ aspectRatio: "3/4" }}>
+        <img src={Akhil} alt="Akhil Dwivedi" className="w-full h-full object-cover grayscale" />
+      </div>
+
+      {/* slash list */}
+      <div className="mt-3 flex flex-col gap-[6px]">
+        {SLASH_LIST.map((line, i) => (
+          <motion.p
+            key={line}
+            variants={fadeIn} initial="hidden" animate="visible" custom={custom + i * 0.3}
+            className="font-sans font-bold text-bone leading-none"
+            style={{ fontSize: "11px", letterSpacing: "0.04em" }}
+          >
+            {line}
+          </motion.p>
+        ))}
+      </div>
+    </motion.div>
+  );
+}
+
+// ─── main hero ────────────────────────────────────────────────────────────────
 
 export default function Hero() {
   return (
-    <section
-      id="hero"
-      className="relative w-full min-h-screen overflow-hidden select-none bg-void"
-    >
-      {/* nav is now rendered at App level as a fixed element */}
+    <section id="hero" className="relative w-full min-h-screen select-none bg-void overflow-hidden">
 
-      {/* ── giant headline ───────────────────────────────────────── */}
-      {/* Line 1 — DEVOPS */}
-      <div className="absolute top-[14%] left-0 right-0 overflow-hidden z-10 px-4 sm:px-6 md:px-8">
-        <div className="overflow-hidden">
-          <motion.h1
-            variants={clipUp}
-            initial="hidden"
-            animate="visible"
-            custom={1}
-            className="font-sans font-black text-bone leading-none whitespace-nowrap"
-            style={{
-              fontSize: "clamp(40px, 13vw, 195px)",
-              letterSpacing: "-0.06em",
-            }}
-          >
-            DEVOPS
-          </motion.h1>
+      {/* ── MOBILE layout (< 640px) ── */}
+      <div className="flex sm:hidden flex-col px-4 pb-8 min-h-screen" style={{ paddingTop: "72px" }}>
+
+        {/* headline + photo side by side */}
+        <div className="flex items-start gap-3 mt-6">
+          {/* headline — takes remaining width */}
+          <div className="flex-1 min-w-0">
+            <HeadlineStack />
+          </div>
+
+          {/* photo — fixed narrow column on the right */}
+          <div className="flex-shrink-0" style={{ width: "28vw", maxWidth: "120px" }}>
+            <PhotoBlock custom={2.2} showBasedIn={false} />
+          </div>
         </div>
+
+        {/* spacer */}
+        <div className="flex-1" />
+
+        {/* availability */}
+        <motion.div
+          variants={fadeIn} initial="hidden" animate="visible" custom={3.2}
+          className="flex flex-col gap-[6px] pb-2"
+        >
+          <p className="font-mono text-[9px] tracking-[0.18em] text-dim">{AVAIL_TAG}</p>
+          <a href="mailto:akhildwivedi453@gmail.com"
+            className="font-mono text-[11px] tracking-[0.06em] text-bone hover:text-ash transition-colors duration-300 break-all">
+            {AVAIL_VAL}
+          </a>
+        </motion.div>
       </div>
 
-      {/* Serif italic connective — "engineering" */}
-      <div
-        className="absolute left-0 right-0 overflow-hidden z-10 px-4 sm:px-6 md:px-8"
-        style={{ top: "calc(14% + clamp(36px, 11.8vw, 178px))" }}
-      >
-        <div className="overflow-hidden">
-          <motion.p
-            variants={clipUp}
-            initial="hidden"
-            animate="visible"
-            custom={1.2}
-            className="font-serif italic font-normal text-ash leading-none"
-            style={{
-              fontSize: "clamp(18px, 3.2vw, 42px)",
-              letterSpacing: "-0.02em",
-              paddingLeft: "0.15em",
-            }}
-          >
-            engineering
-          </motion.p>
-        </div>
-      </div>
-
-      {/* Line 2 — SYSTEMS (outline) */}
-      <div
-        className="absolute left-0 right-0 overflow-hidden z-10 px-4 sm:px-6 md:px-8"
-        style={{ top: "calc(14% + clamp(56px, 16vw, 240px))" }}
-      >
-        <div className="overflow-hidden">
-          <motion.h1
-            variants={clipUp}
-            initial="hidden"
-            animate="visible"
-            custom={1.4}
-            className="font-sans font-black leading-none whitespace-nowrap"
-            style={{
-              fontSize: "clamp(40px, 13vw, 195px)",
-              letterSpacing: "-0.06em",
-              WebkitTextFillColor: "transparent",
-              WebkitTextStroke: "2px color-mix(in srgb, var(--color-bone) 50%, transparent)",
-            }}
-          >
-            SYSTEMS
-          </motion.h1>
-        </div>
-      </div>
-
-      {/* ── photo block — hidden on very small screens, repositioned on tablets ── */}
-      <motion.div
-        variants={photoReveal}
-        initial="hidden"
-        animate="visible"
-        className="absolute z-20 hidden sm:block"
-        style={{
-          top: "clamp(80px, 12vw, 160px)",
-          right: "clamp(16px, 8vw, 140px)",
-          width: "clamp(140px, 20vw, 280px)",
-        }}
-      >
-        {/* photo — grayscale, fills the frame */}
+      {/* ── DESKTOP layout (≥ 640px): absolute positioned, original feel ── */}
+      <div className="hidden sm:block">
+        {/* headline — left, stops before photo column */}
         <div
-          className="w-full bg-surface border border-bone/10 overflow-hidden"
-          style={{ aspectRatio: "3/4" }}
+          className="absolute z-10 px-6 md:px-8"
+          style={{ top: "14%", left: 0, right: "clamp(160px, 26vw, 400px)" }}
         >
-          <img
-            src={Akhil}
-            alt="Akhil Dwivedi"
-            className="w-full h-full object-cover grayscale"
-          />
+          <HeadlineStack />
         </div>
 
-        {/* slash list — sits below photo, left-anchored */}
-        <div className="mt-3 sm:mt-5 flex flex-col gap-[6px]">
-          {SLASH_LIST.map((line, i) => (
-            <motion.p
-              key={line}
-              variants={fadeIn}
-              initial="hidden"
-              animate="visible"
-              custom={2.2 + i * 0.3}
-              className="font-sans font-bold text-bone leading-none"
-              style={{ fontSize: "clamp(8px, 1.1vw, 14px)", letterSpacing: "0.04em" }}
-            >
-              {line}
-            </motion.p>
-          ))}
-        </div>
-      </motion.div>
-
-      {/* ── based-in annotation — hidden on very small screens ── */}
-      <motion.p
-        variants={fadeIn}
-        initial="hidden"
-        animate="visible"
-        custom={2.8}
-        className="absolute z-30 font-mono text-dim tracking-[0.22em] hidden sm:block"
-        style={{
-          fontSize: "10px",
-          top: "clamp(54px, 8vw, 112px)",
-          right: "clamp(16px, 8vw, 140px)",
-        }}
-      >
-        {BASED_IN}
-      </motion.p>
-
-      {/* ── bottom-left: availability + email ────────────────────── */}
-      <motion.div
-        variants={fadeIn}
-        initial="hidden"
-        animate="visible"
-        custom={3.2}
-        className="absolute bottom-6 sm:bottom-10 left-4 sm:left-8 z-20 flex flex-col gap-[6px] max-w-[calc(100vw-32px)]"
-      >
-        <p className="font-mono text-[9px] sm:text-[10px] tracking-[0.18em] text-dim">
-          {AVAIL_TAG}
-        </p>
-        <a
-          href="mailto:akhildwivedi453@gmail.com"
-          className="font-mono text-[11px] sm:text-[13px] tracking-[0.06em] text-bone hover:text-ash transition-colors duration-300 break-all sm:break-normal"
+        {/* photo — right column */}
+        <div
+          className="absolute z-20"
+          style={{
+            top: "clamp(80px, 10vw, 140px)",
+            right: "clamp(16px, 4vw, 140px)",
+            width: "clamp(130px, 20vw, 280px)",
+          }}
         >
-          {AVAIL_VAL}
-        </a>
-      </motion.div>
+          <PhotoBlock custom={2.2} showBasedIn={true} />
+        </div>
 
-      {/* ── bottom-right: recent role — hidden on very small screens to avoid overlap ── */}
-      <motion.div
-        variants={fadeIn}
-        initial="hidden"
-        animate="visible"
-        custom={3.4}
-        className="absolute bottom-6 sm:bottom-10 right-4 sm:right-8 z-20 flex-col gap-[6px] text-right hidden sm:flex"
-      >
-        <p className="font-mono text-[10px] tracking-[0.18em] text-dim">
-          {RECENT_TAG}  ↘
-        </p>
-        <p className="font-mono text-[11px] sm:text-[12px] tracking-[0.04em] text-bone font-bold">
-          {RECENT_VAL}
-        </p>
-      </motion.div>
+        {/* bottom-left: availability */}
+        <motion.div
+          variants={fadeIn} initial="hidden" animate="visible" custom={3.2}
+          className="absolute bottom-10 left-8 z-20 flex flex-col gap-[6px]"
+        >
+          <p className="font-mono text-[10px] tracking-[0.18em] text-dim">{AVAIL_TAG}</p>
+          <a href="mailto:akhildwivedi453@gmail.com"
+            className="font-mono text-[13px] tracking-[0.06em] text-bone hover:text-ash transition-colors duration-300">
+            {AVAIL_VAL}
+          </a>
+        </motion.div>
 
-      {/* ── thin horizontal rule at bottom ───────────────────────── */}
+        {/* bottom-right: recent role */}
+        <motion.div
+          variants={fadeIn} initial="hidden" animate="visible" custom={3.4}
+          className="absolute bottom-10 right-8 z-20 flex flex-col gap-[6px] text-right"
+        >
+          <p className="font-mono text-[10px] tracking-[0.18em] text-dim">{RECENT_TAG}  ↘</p>
+          <p className="font-mono text-[12px] tracking-[0.04em] text-bone font-bold">{RECENT_VAL}</p>
+        </motion.div>
+      </div>
+
+      {/* ── hairline bottom rule ── */}
       <motion.div
-        variants={fadeIn}
-        initial="hidden"
-        animate="visible"
-        custom={3.6}
+        variants={fadeIn} initial="hidden" animate="visible" custom={3.6}
         className="absolute bottom-0 left-0 right-0 h-px z-10 bg-iron/30"
       />
     </section>
