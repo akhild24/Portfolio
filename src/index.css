@@ -45,3 +45,81 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   RESPONSIVE LAYOUT UTILITIES
+   These handle grid layouts that can't be done with inline styles alone.
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+/* ── ProjectCard: single column on mobile, two columns on ≥768px ───────────── */
+.project-card-grid {
+  grid-template-columns: 1fr !important;
+}
+
+@media (min-width: 768px) {
+  .project-card-grid {
+    grid-template-columns: 1.15fr 0.85fr !important;
+  }
+
+  .project-card-left {
+    border-right: 1px solid var(--color-graphite) !important;
+    border-bottom: none !important;
+  }
+}
+
+/* ── Projects section: sidebar + card grid ──────────────────────────────────── */
+.projects-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .projects-body {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    flex-direction: unset;
+  }
+}
+
+/* ── Contact section: stacked on mobile, two columns on ≥768px ─────────────── */
+.contact-body {
+  grid-template-columns: 1fr !important;
+}
+
+@media (min-width: 768px) {
+  .contact-body {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+/* ── Smooth scrolling for anchor navigation ────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── Prevent horizontal overflow on mobile ─────────────────────────────────── 
+   Using `clip` instead of `hidden` to avoid breaking position:sticky 
+   (overflow:hidden creates a scroll container that kills sticky)          ── */
+html, body {
+  overflow-x: clip;
+}
+
+/* ── About BioPanel: scale photo + text for mobile ─────────────────────────── */
+@media (max-width: 639px) {
+  .about-photo,
+  .about-photo > div {
+    width: 220px !important;
+    height: 240px !important;
+  }
+  .about-name {
+    width: 220px !important;
+  }
+  .about-bio-text br {
+    display: none;
+  }
+  .about-bio-text {
+    word-break: break-word;
+  }
+}

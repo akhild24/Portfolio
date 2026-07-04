@@ -107,21 +107,22 @@ function CoePlatformCard() {
       <div
         style={{
           marginTop: 24,
-          padding: "20px 16px",
+          padding: "16px 12px",
           background: SURFACE,
           borderRadius: 6,
           border: `1px solid ${GRAPHITE}`,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          gap: 12,
+          gap: 8,
+          flexWrap: "wrap",
         }}
       >
         {["ADMIN", "FACULTY", "STUDENT"].map((role, i) => (
-          <div key={role} style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          <div key={role} style={{ display: "flex", alignItems: "center", gap: 8 }}>
             <div
               style={{
-                padding: "6px 12px",
+                padding: "6px 10px",
                 border: `1px solid ${i === 1 ? ARTERIAL : GRAPHITE}`,
                 borderRadius: 4,
                 fontFamily: MONO,
@@ -405,6 +406,8 @@ function StatusBar() {
         padding: "16px 0",
         marginTop: 48,
         borderTop: `1px solid ${GRAPHITE}`,
+        flexWrap: "wrap",
+        gap: 12,
       }}
     >
       <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
@@ -441,7 +444,7 @@ function StatusBar() {
    ═══════════════════════════════════════════════════════════════════════════════ */
 
 export default function Work() {
-  const pad = "clamp(36px, 6vw, 80px)";
+  const pad = "clamp(16px, 6vw, 80px)";
 
   return (
     <section

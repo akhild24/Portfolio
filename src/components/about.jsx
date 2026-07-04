@@ -30,7 +30,7 @@ function TitlePanel() {
         animate={visible ? { opacity: 1 } : {}}
         transition={{ duration: 0.4, delay: 0.05 }}
         style={{
-          position: "absolute", top: 28, left: 36,
+          position: "absolute", top: 28, left: "clamp(16px, 4vw, 36px)",
           fontFamily: MONO, fontSize: "11px",
           letterSpacing: "0.15em", color: INK,
           textTransform: "uppercase",
@@ -45,7 +45,7 @@ function TitlePanel() {
         animate={visible ? { opacity: 1 } : {}}
         transition={{ duration: 0.35 }}
         style={{
-          position: "absolute", top: 28, right: 36,
+          position: "absolute", top: 28, right: "clamp(16px, 4vw, 36px)",
           fontFamily: MONO, fontWeight: 700,
           fontSize: "clamp(15px, 1.8vw, 22px)", color: INK,
         }}
@@ -128,7 +128,7 @@ function ManifestoPanel() {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        padding: "80px 40px",
+        padding: "80px clamp(16px, 5vw, 40px)",
         boxSizing: "border-box",
         position: "relative",
         zIndex: 2,
@@ -136,7 +136,7 @@ function ManifestoPanel() {
     >
       {/* panel number */}
       <motion.div initial={{ opacity: 0 }} animate={visible ? { opacity: 1 } : {}} transition={{ duration: 0.35 }}
-        style={{ position: "absolute", top: 36, left: 36, fontFamily: MONO, fontWeight: 700, fontSize: "clamp(15px, 1.8vw, 22px)", color: BONE }}>
+        style={{ position: "absolute", top: 36, left: "clamp(16px, 4vw, 36px)", fontFamily: MONO, fontWeight: 700, fontSize: "clamp(15px, 1.8vw, 22px)", color: BONE }}>
         2/3
       </motion.div>
 
@@ -148,7 +148,7 @@ function ManifestoPanel() {
 
       {/* right label */}
       <motion.div initial={{ opacity: 0 }} animate={visible ? { opacity: 1 } : {}} transition={{ duration: 0.35, delay: 0.05 }}
-        style={{ position: "absolute", top: 40, right: 36, fontFamily: MONO, fontSize: "11px", letterSpacing: "0.15em", color: DIM, textTransform: "uppercase" }}>
+        style={{ position: "absolute", top: 40, right: "clamp(16px, 4vw, 36px)", fontFamily: MONO, fontSize: "11px", letterSpacing: "0.15em", color: DIM, textTransform: "uppercase" }}>
         DSGN/2
       </motion.div>
 
@@ -173,12 +173,13 @@ function ManifestoPanel() {
                 alignItems: "baseline",
                 gap: "0.25em",
                 paddingBottom: "0.04em",
+                flexWrap: "wrap",
               }}
             >
               <span
                 style={{
                   fontFamily: SANS, fontWeight: 900,
-                  fontSize: "clamp(38px, 6.5vw, 88px)",
+                  fontSize: "clamp(24px, 6.5vw, 88px)",
                   letterSpacing: "-0.06em",
                   color: line.bright ? BONE : SMOKE,
                   textTransform: "uppercase",
@@ -191,7 +192,7 @@ function ManifestoPanel() {
                 <span
                   style={{
                     fontFamily: SERIF, fontStyle: "italic", fontWeight: 400,
-                    fontSize: "clamp(22px, 3.2vw, 42px)",
+                    fontSize: "clamp(16px, 3.2vw, 42px)",
                     letterSpacing: "-0.02em",
                     color: ASH,
                   }}
@@ -256,7 +257,7 @@ function BioPanel() {
         animate={entered ? { opacity: 1 } : {}}
         transition={{ duration: 0.4 }}
         style={{
-          position: "absolute", top: 28, left: 36,
+          position: "absolute", top: 28, left: "clamp(16px, 4vw, 36px)",
           fontFamily: MONO, fontSize: "11px",
           letterSpacing: "0.13em", color: DIM,
           textTransform: "uppercase",
@@ -271,7 +272,7 @@ function BioPanel() {
         animate={entered ? { opacity: 1 } : {}}
         transition={{ duration: 0.35 }}
         style={{
-          position: "absolute", top: 28, right: 36,
+          position: "absolute", top: 28, right: "clamp(16px, 4vw, 36px)",
           fontFamily: MONO, fontWeight: 700,
           fontSize: "clamp(15px, 1.8vw, 22px)", color: BONE,
         }}
@@ -280,20 +281,20 @@ function BioPanel() {
       </motion.div>
 
       {/* ── two-column layout ─────────────────────────────────────── */}
-      <div style={{
+      <div className="about-bio-layout" style={{
         display: "flex",
         alignItems: "flex-start",
         gap: "clamp(40px, 5vw, 80px)",
         paddingTop: 80,
-        paddingLeft: "clamp(36px, 6vw, 120px)",
-        paddingRight: "clamp(36px, 6vw, 120px)",
+        paddingLeft: "clamp(16px, 6vw, 120px)",
+        paddingRight: "clamp(16px, 6vw, 120px)",
         boxSizing: "border-box",
         flexWrap: "wrap",
       }}>
         {/* ── LEFT COLUMN — photo + name + experience ─────────────── */}
         <div style={{ flex: "0 0 auto" }}>
           {/* PHOTO — wipe clip driven by scroll */}
-          <div style={{ width: 280, height: 300, position: "relative", overflow: "visible" }}>
+          <div className="about-photo" style={{ width: 280, height: 300, position: "relative", overflow: "visible" }}>
             <motion.div
               style={{
                 width: 280,
@@ -327,6 +328,7 @@ function BioPanel() {
               opacity: nameOpacity,
               y: nameY,
             }}
+            className="about-name"
           >
             <div style={{
               fontFamily: SERIF, fontStyle: "italic", fontWeight: 400,
@@ -355,7 +357,7 @@ function BioPanel() {
             }}>
               MY EXPERIENCE <span style={{ fontSize: "12px" }}>↘</span>
             </div>
-            <p style={{
+            <p className="about-bio-text" style={{
               fontFamily: MONO, fontSize: "12px", lineHeight: 2.0,
               letterSpacing: "0.1em", color: ASH,
               textTransform: "uppercase", margin: 0, maxWidth: 520,

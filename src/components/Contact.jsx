@@ -40,20 +40,20 @@ export default function Contact() {
       id="contact"
       style={{
         backgroundColor: "var(--color-void)",
-        paddingBottom: "120px",
+        paddingBottom: "80px",
         overflowX: "hidden",
       }}
     >
       {/* ── HEADER ── */}
-      <div style={{ position: "relative", paddingTop: "120px" }}>
+      <div style={{ position: "relative", paddingTop: "80px" }}>
         {/* Eyebrow */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.5, delay: 0.1 }}
           style={{
-            paddingLeft: "clamp(24px, 6vw, 96px)",
-            marginBottom: "24px",
+            paddingLeft: "clamp(16px, 6vw, 96px)",
+            marginBottom: "20px",
             display: "flex",
             alignItems: "center",
             gap: "12px",
@@ -94,7 +94,7 @@ export default function Contact() {
         {/* Giant headline */}
         <div
           style={{
-            paddingLeft: "clamp(24px, 6vw, 96px)",
+            paddingLeft: "clamp(16px, 6vw, 96px)",
             display: "flex",
             alignItems: "flex-end",
             justifyContent: "space-between",
@@ -110,7 +110,7 @@ export default function Contact() {
               style={{
                 fontFamily: "var(--font-sans)",
                 fontWeight: 900,
-                fontSize: "clamp(64px, 13vw, 195px)",
+                fontSize: "clamp(42px, 13vw, 195px)",
                 letterSpacing: "-0.06em",
                 lineHeight: 0.88,
                 margin: 0,
@@ -137,7 +137,7 @@ export default function Contact() {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, ease: EASE, delay: 0.35 }}
             style={{
-              paddingRight: "clamp(24px, 6vw, 96px)",
+              paddingRight: "clamp(16px, 6vw, 96px)",
               paddingBottom: "12px",
               textAlign: "right",
             }}
@@ -184,7 +184,7 @@ export default function Contact() {
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.45 }}
           style={{
-            paddingLeft: "clamp(24px, 6vw, 96px)",
+            paddingLeft: "clamp(16px, 6vw, 96px)",
             marginTop: "16px",
           }}
         >
@@ -206,7 +206,7 @@ export default function Contact() {
           animate={inView ? { scaleX: 1 } : {}}
           transition={{ duration: 1, ease: EASE, delay: 0.5 }}
           style={{
-            marginTop: "40px",
+            marginTop: "32px",
             height: "1px",
             width: "100%",
             transformOrigin: "left",
@@ -218,13 +218,13 @@ export default function Contact() {
 
       {/* ── BODY ── */}
       <div
+        className="contact-body"
         style={{
-          paddingTop: "80px",
-          paddingLeft: "clamp(24px, 6vw, 96px)",
-          paddingRight: "clamp(24px, 6vw, 96px)",
+          paddingTop: "48px",
+          paddingLeft: "clamp(16px, 6vw, 96px)",
+          paddingRight: "clamp(16px, 6vw, 96px)",
           display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: "clamp(40px, 6vw, 96px)",
+          gap: "clamp(32px, 6vw, 96px)",
           alignItems: "start",
         }}
       >
@@ -250,11 +250,11 @@ export default function Contact() {
           <p
             style={{
               fontFamily: "var(--font-sans)",
-              fontSize: "clamp(15px, 1.5vw, 18px)",
+              fontSize: "clamp(14px, 1.5vw, 18px)",
               color: "var(--color-ash)",
               lineHeight: 1.7,
               maxWidth: "420px",
-              marginBottom: "48px",
+              marginBottom: "36px",
             }}
           >
             Whether it's an internship, a collaboration, or just a question
@@ -262,7 +262,7 @@ export default function Contact() {
           </p>
 
           {/* Contact links */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
             {[
               { label: "EMAIL", value: "akhildwivedi453@gmail.com", href: "mailto:akhildwivedi453@gmail.com" },
               { label: "GITHUB", value: "github.com/akhild24", href: "https://github.com/akhild24" },
@@ -273,9 +273,10 @@ export default function Contact() {
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  gap: "16px",
-                  paddingBottom: "16px",
+                  gap: "12px",
+                  paddingBottom: "14px",
                   borderBottom: "1px solid var(--color-graphite)",
+                  flexWrap: "wrap",
                 }}
               >
                 <span
@@ -285,7 +286,7 @@ export default function Contact() {
                     letterSpacing: "0.2em",
                     color: "var(--color-iron)",
                     textTransform: "uppercase",
-                    minWidth: "72px",
+                    minWidth: "60px",
                   }}
                 >
                   {label}
@@ -297,11 +298,12 @@ export default function Contact() {
                     rel="noreferrer"
                     style={{
                       fontFamily: "var(--font-mono)",
-                      fontSize: "12px",
+                      fontSize: "11px",
                       color: "var(--color-ash)",
                       textDecoration: "none",
                       letterSpacing: "0.04em",
                       transition: "color 0.2s",
+                      wordBreak: "break-all",
                     }}
                     onMouseEnter={(e) => (e.target.style.color = "#00e38f")}
                     onMouseLeave={(e) => (e.target.style.color = "var(--color-ash)")}
@@ -312,7 +314,7 @@ export default function Contact() {
                   <span
                     style={{
                       fontFamily: "var(--font-mono)",
-                      fontSize: "12px",
+                      fontSize: "11px",
                       color: "var(--color-ash)",
                       letterSpacing: "0.04em",
                     }}
@@ -334,7 +336,7 @@ export default function Contact() {
             backgroundColor: "var(--color-plate)",
             border: "1px solid var(--color-graphite)",
             borderRadius: "var(--radius-md)",
-            padding: "clamp(24px, 3vw, 40px)",
+            padding: "clamp(20px, 3vw, 40px)",
           }}
         >
           {/* Form header */}
@@ -343,8 +345,8 @@ export default function Contact() {
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              marginBottom: "32px",
-              paddingBottom: "16px",
+              marginBottom: "24px",
+              paddingBottom: "14px",
               borderBottom: "1px solid var(--color-smoke)",
             }}
           >
@@ -385,7 +387,7 @@ export default function Contact() {
           </div>
 
           {/* Fields */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
             {[
               { name: "name", label: "NAME", placeholder: "Akhil Dwivedi" },
               { name: "email", label: "EMAIL", placeholder: "you@example.com" },
@@ -448,7 +450,7 @@ export default function Contact() {
                 value={form.message}
                 onChange={handleChange}
                 placeholder="What's on your mind..."
-                rows={5}
+                rows={4}
                 style={{
                   width: "100%",
                   backgroundColor: "var(--color-surface)",
@@ -540,10 +542,10 @@ export default function Contact() {
         animate={inView ? { opacity: 1 } : {}}
         transition={{ duration: 0.6, delay: 1 }}
         style={{
-          marginTop: "100px",
-          paddingLeft: "clamp(24px, 6vw, 96px)",
-          paddingRight: "clamp(24px, 6vw, 96px)",
-          paddingTop: "24px",
+          marginTop: "60px",
+          paddingLeft: "clamp(16px, 6vw, 96px)",
+          paddingRight: "clamp(16px, 6vw, 96px)",
+          paddingTop: "20px",
           borderTop: "1px solid var(--color-graphite)",
           display: "flex",
           justifyContent: "space-between",

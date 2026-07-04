@@ -182,6 +182,44 @@ function IndexItem({ project, isActive, onClick }) {
   );
 }
 
+/* ── Mobile dot selector ─────────────────────────────────────────────────────── */
+function MobileProjectSelector({ activeIndex, goTo, projects: projs }) {
+  return (
+    <div style={{
+      display: "flex",
+      gap: "6px",
+      alignItems: "center",
+      justifyContent: "center",
+      padding: "12px 16px",
+      borderBottom: `1px solid ${GRAPHITE}`,
+      overflowX: "auto",
+      flexWrap: "wrap",
+    }}>
+      {projs.map((p, i) => (
+        <button
+          key={p.index}
+          onClick={() => goTo(i, i > activeIndex ? 1 : -1)}
+          style={{
+            fontFamily: MONO,
+            fontSize: "8px",
+            letterSpacing: "0.08em",
+            color: i === activeIndex ? BONE : DIM,
+            background: i === activeIndex ? ARTERIAL + "20" : "transparent",
+            border: `1px solid ${i === activeIndex ? ARTERIAL : GRAPHITE}`,
+            padding: "6px 10px",
+            cursor: "pointer",
+            textTransform: "uppercase",
+            transition: "all 0.2s",
+            whiteSpace: "nowrap",
+          }}
+        >
+          {p.index}
+        </button>
+      ))}
+    </div>
+  );
+}
+
 /* ── Main component ──────────────────────────────────────────────────────────── */
 export default function Projects() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -246,12 +284,14 @@ export default function Projects() {
     >
       {/* ── Section header ─────────────────────────────────────────────── */}
       <div style={{
-        padding: "80px clamp(24px, 6vw, 80px) 32px",
+        padding: "80px clamp(16px, 6vw, 80px) 24px",
         borderBottom: `1px solid ${GRAPHITE}`,
         display: "flex",
         alignItems: "flex-end",
         justifyContent: "space-between",
         flexShrink: 0,
+        flexWrap: "wrap",
+        gap: "16px",
       }}>
         <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
           <span style={{
@@ -264,7 +304,7 @@ export default function Projects() {
           <h2 style={{
             fontFamily: SANS,
             fontWeight: 900,
-            fontSize: "clamp(48px, 8vw, 110px)",
+            fontSize: "clamp(36px, 8vw, 110px)",
             color: BONE,
             letterSpacing: "-0.06em",
             lineHeight: 0.95,
@@ -278,7 +318,7 @@ export default function Projects() {
           </h2>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "16px" }}>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "12px" }}>
           <div style={{
             fontFamily: MONO,
             fontSize: "10px",
@@ -313,19 +353,18 @@ export default function Projects() {
         }} />
       </div>
 
-      {/* ── Body: sidebar + card ───────────────────────────────────────── */}
-      <div style={{
-        flex: 1,
-        display: "grid",
-        gridTemplateColumns: "200px 1fr",
-        overflow: "hidden",
-      }}>
+      {/* ── Mobile project selector (visible on small screens) ─────────── */}
+      <div className="block md:hidden">
+        <MobileProjectSelector activeIndex={activeIndex} goTo={goTo} projects={projects} />
+      </div>
 
-        {/* ── Left sidebar index ─────────────────────────────────────── */}
-        <div style={{
+      {/* ── Body: sidebar + card ───────────────────────────────────────── */}
+      <div className="projects-body">
+
+        {/* ── Left sidebar index — hidden on mobile ───────────────────── */}
+        <div className="projects-sidebar hidden md:flex" style={{
           borderRight: `1px solid ${GRAPHITE}`,
-          padding: "24px clamp(16px, 2vw, 28px)",
-          display: "flex",
+          padding: "24px clamp(12px, 2vw, 28px)",
           flexDirection: "column",
           justifyContent: "center",
           overflowY: "auto",
@@ -367,8 +406,9 @@ export default function Projects() {
           position: "relative",
           display: "flex",
           alignItems: "center",
-          padding: "32px clamp(24px, 4vw, 56px) 40px",
+          padding: "16px clamp(12px, 4vw, 56px) 24px",
           overflow: "hidden",
+          flex: 1,
         }}>
           <AnimatePresence mode="wait" custom={direction}>
             <ProjectCard
@@ -382,13 +422,13 @@ export default function Projects() {
 
       {/* ── Bottom dot bar ─────────────────────────────────────────────── */}
       <div style={{
-        padding: "0 clamp(24px, 6vw, 80px) 24px",
+        padding: "0 clamp(16px, 6vw, 80px) 20px",
         display: "flex",
         alignItems: "center",
         justifyContent: "flex-end",
         flexShrink: 0,
         borderTop: `1px solid ${GRAPHITE}`,
-        paddingTop: "16px",
+        paddingTop: "14px",
       }}>
         <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
           {projects.map((_, i) => (

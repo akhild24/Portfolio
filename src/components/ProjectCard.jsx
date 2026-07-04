@@ -21,23 +21,26 @@ export default function ProjectCard({ project, direction }) {
         background: SURFACE,
         border: `1px solid ${GRAPHITE}`,
         display: "grid",
-        gridTemplateColumns: "1.15fr 0.85fr",
-        height: "580px",
+        gridTemplateColumns: "1fr",
+        minHeight: "auto",
         overflow: "hidden",
       }}
+      className="project-card-grid"
     >
 
       {/* ══════════════════════════════════════════════════════
           LEFT — title, description
       ══════════════════════════════════════════════════════ */}
       <div style={{
-        padding: "28px 32px 32px",
+        padding: "20px 20px 24px",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        borderRight: `1px solid ${GRAPHITE}`,
+        borderBottom: `1px solid ${GRAPHITE}`,
         overflowY: "auto",
-      }}>
+      }}
+      className="project-card-left"
+      >
 
         {/* Top meta row */}
         <div>
@@ -45,7 +48,9 @@ export default function ProjectCard({ project, direction }) {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "flex-start",
-            marginBottom: "22px",
+            marginBottom: "16px",
+            flexWrap: "wrap",
+            gap: "8px",
           }}>
             <div style={{ display: "flex", flexDirection: "column", gap: "3px" }}>
               <span style={{
@@ -74,15 +79,15 @@ export default function ProjectCard({ project, direction }) {
           </div>
 
           {/* Category pills */}
-          <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginBottom: "22px" }}>
+          <div style={{ display: "flex", gap: "6px", flexWrap: "wrap", marginBottom: "16px" }}>
             {project.categories.map((cat) => (
               <span key={cat} style={{
                 fontFamily: MONO,
-                fontSize: "9px",
+                fontSize: "8px",
                 letterSpacing: "0.08em",
                 color: ASH,
                 border: `1px solid ${GRAPHITE}`,
-                padding: "4px 10px",
+                padding: "4px 8px",
                 textTransform: "uppercase",
               }}>{cat}</span>
             ))}
@@ -92,11 +97,11 @@ export default function ProjectCard({ project, direction }) {
           <h3 style={{
             fontFamily: SANS,
             fontWeight: 900,
-            fontSize: "clamp(44px, 6.5vw, 88px)",
+            fontSize: "clamp(28px, 5vw, 88px)",
             color: BONE,
             letterSpacing: "-0.04em",
             lineHeight: 0.92,
-            margin: "0 0 18px 0",
+            margin: "0 0 14px 0",
             whiteSpace: "pre-line",
           }}>{project.title}</h3>
 
@@ -105,14 +110,14 @@ export default function ProjectCard({ project, direction }) {
             display: "flex",
             alignItems: "center",
             gap: "12px",
-            marginBottom: "22px",
+            marginBottom: "16px",
           }}>
             <div style={{ width: "28px", height: "1px", background: ARTERIAL, flexShrink: 0 }} />
             <span style={{
               fontFamily: SERIF,
               fontStyle: "italic",
               fontWeight: 400,
-              fontSize: "15px",
+              fontSize: "clamp(13px, 1.5vw, 15px)",
               color: ASH,
               letterSpacing: "-0.01em",
             }}>{project.connective}</span>
@@ -147,13 +152,13 @@ export default function ProjectCard({ project, direction }) {
         }}>
           {project.metrics.map((m, i) => (
             <div key={m.label} style={{
-              padding: "22px 24px 18px",
+              padding: "16px 16px 14px",
               borderRight: i < project.metrics.length - 1 ? `1px solid ${GRAPHITE}` : "none",
             }}>
               <div style={{
                 fontFamily: SANS,
                 fontWeight: 900,
-                fontSize: "clamp(26px, 3.5vw, 44px)",
+                fontSize: "clamp(24px, 3.5vw, 44px)",
                 color: ARTERIAL,
                 letterSpacing: "-0.03em",
                 lineHeight: 1,
@@ -173,16 +178,17 @@ export default function ProjectCard({ project, direction }) {
         {/* ── Stack list ───────────────────────────────────── */}
         <div style={{
           flex: 1,
-          padding: "16px 24px",
+          padding: "12px 16px",
           borderBottom: `1px solid ${GRAPHITE}`,
           overflowY: "auto",
+          maxHeight: "240px",
         }}>
           {/* Section label */}
           <div style={{
             display: "flex",
             alignItems: "center",
             gap: "8px",
-            marginBottom: "12px",
+            marginBottom: "10px",
           }}>
             <div style={{ width: "5px", height: "5px", background: SIGNAL, flexShrink: 0 }} />
             <span style={{
@@ -199,7 +205,7 @@ export default function ProjectCard({ project, direction }) {
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              padding: "8px 0",
+              padding: "6px 0",
               borderTop: `1px solid ${PLATE}`,
             }}>
               <span style={{
@@ -220,10 +226,10 @@ export default function ProjectCard({ project, direction }) {
 
         {/* ── Status + CTA ─────────────────────────────────── */}
         <div style={{
-          padding: "16px 24px 24px",
+          padding: "12px 16px 16px",
           display: "flex",
           flexDirection: "column",
-          gap: "12px",
+          gap: "10px",
           flexShrink: 0,
         }}>
           {/* Status row */}
@@ -231,6 +237,8 @@ export default function ProjectCard({ project, direction }) {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
+            flexWrap: "wrap",
+            gap: "6px",
           }}>
             <div style={{ display: "flex", alignItems: "center", gap: "7px" }}>
               <div style={{ width: "5px", height: "5px", background: SIGNAL, flexShrink: 0 }} />
@@ -261,7 +269,7 @@ export default function ProjectCard({ project, direction }) {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
-                padding: "13px 16px",
+                padding: "11px 14px",
                 border: `1px solid ${ARTERIAL}`,
                 textDecoration: "none",
                 background: "transparent",
@@ -285,7 +293,7 @@ export default function ProjectCard({ project, direction }) {
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              padding: "13px 16px",
+              padding: "11px 14px",
               border: `1px solid ${GRAPHITE}`,
             }}>
               <span style={{

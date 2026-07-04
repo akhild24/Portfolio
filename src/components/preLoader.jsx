@@ -225,8 +225,8 @@ const styles = {
     fontFamily:     "var(--font-mono)",
   },
   canvas: {
-    width:  "780px",
-    height: "560px",
+    width:    "min(780px, 90vw)",
+    height:   "min(560px, 65vh)",
   },
   counter: {
     marginTop:     "28px",
@@ -243,7 +243,7 @@ const styles = {
     fontFamily:    "var(--font-mono)",
   },
   barTrack: {
-    width:      "160px",
+    width:      "min(160px, 50vw)",
     height:     "1px",
     background: "var(--color-ash)",
     position:   "relative",
