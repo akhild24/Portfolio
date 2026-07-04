@@ -156,7 +156,7 @@ const domains = [
     label: "DATABASES & TOOLS",
     accent: ASH,
     skills: [
-      { label: "PostgreSQL", iconClass: "devicon-postgresql-plain" },
+      
       { label: "MySQL", iconClass: "devicon-mysql-plain" },
       { label: "MongoDB", iconClass: "devicon-mongodb-plain" },
       { label: "Git", iconClass: "devicon-git-plain" },
@@ -172,8 +172,7 @@ const domains = [
     skills: [
       { label: "Prometheus", iconClass: "devicon-prometheus-original" },
       { label: "Grafana", iconClass: "devicon-grafana-plain" },
-      { label: "Loki", lucide: "Flame" },
-      { label: "Alertmanager", lucide: "BellRing" },
+      
       { label: "OpenTelemetry", iconClass: "devicon-opentelemetry-plain" },
       { label: "VAPT", lucide: "ShieldAlert" },
       { label: "OWASP Top 10", lucide: "Shield" },

@@ -292,7 +292,7 @@ function BioPanel() {
         flexWrap: "wrap",
       }}>
         {/* ── LEFT COLUMN — photo + name + experience ─────────────── */}
-        <div style={{ flex: "0 0 auto" }}>
+        <div style={{ flex: "0 1 auto", minWidth: 0, maxWidth: "100%" }}>
           {/* PHOTO — wipe clip driven by scroll */}
           <div className="about-photo" style={{ width: 280, height: 300, position: "relative", overflow: "visible" }}>
             <motion.div
@@ -360,7 +360,7 @@ function BioPanel() {
             <p className="about-bio-text" style={{
               fontFamily: MONO, fontSize: "12px", lineHeight: 2.0,
               letterSpacing: "0.1em", color: ASH,
-              textTransform: "uppercase", margin: 0, maxWidth: 520,
+              textTransform: "uppercase", margin: 0, maxWidth: "min(520px, 100%)",
             }}>
               A 4TH YEAR CSE STUDENT BUILDING PRODUCTION-GRADE
               <br />

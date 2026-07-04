@@ -12,7 +12,7 @@ function RoleCard() {
         border: `1px solid ${GRAPHITE}`,
         borderRadius: 6,
         padding: "24px 28px",
-        maxWidth: 380,
+        maxWidth: "100%",
         width: "100%",
         background: PLATE,
         position: "relative",
@@ -470,7 +470,7 @@ export default function Work() {
         }}
       >
         {/* left — giant title */}
-        <div style={{ flex: "1 1 400px" }}>
+        <div style={{ flex: "1 1 400px", minWidth: 0, overflow: "hidden" }}>
           {/* company name — massive */}
           <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: -8 }}>
             <img
@@ -513,7 +513,7 @@ export default function Work() {
         </div>
 
         {/* right — role card */}
-        <div style={{ flex: "0 0 auto", paddingTop: 8 }}>
+        <div style={{ flex: "0 1 auto", paddingTop: 8, width: "100%", minWidth: 0, maxWidth: 380 }}>
           <RoleCard />
         </div>
       </div>
