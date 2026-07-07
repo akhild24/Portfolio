@@ -343,6 +343,7 @@ export default function Skills() {
                 color: BONE,
                 lineHeight: 0.9,
                 margin: 0,
+                paddingRight: "0.08em",
               }}
             >
               SK

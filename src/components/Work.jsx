@@ -482,7 +482,7 @@ export default function Work() {
               style={{
                 fontFamily: SANS,
                 fontWeight: 900,
-                fontSize: "clamp(56px, 10vw, 130px)",
+                fontSize: "clamp(28px, 4vw, 48px)",
                 color: BONE,
                 letterSpacing: "-0.06em",
                 lineHeight: 0.95,
@@ -499,16 +499,24 @@ export default function Work() {
             style={{
               fontFamily: SANS,
               fontWeight: 900,
-              fontSize: "clamp(48px, 8vw, 110px)",
+              fontSize: "clamp(56px, 10vw, 130px)",
               lineHeight: 0.95,
               letterSpacing: "-0.05em",
               margin: 0,
               textTransform: "uppercase",
-              WebkitTextFillColor: "transparent",
-              WebkitTextStroke: `1.5px color-mix(in srgb, var(--color-bone) 35%, transparent)`,
+              color: BONE,
+              paddingRight: "0.08em",
             }}
           >
-            INTERNSHIP
+            INT
+            <span
+              style={{
+                WebkitTextFillColor: "transparent",
+                WebkitTextStroke: `1.5px ${BONE}`,
+              }}
+            >
+              ERNSHIP
+            </span>
           </h2>
         </div>
 

@@ -117,6 +117,7 @@ export default function Contact() {
                 color: "transparent",
                 display: "flex",
                 gap: "0.08em",
+                paddingRight: "0.08em",
               }}
             >
               <span style={{ color: "var(--color-bone)" }}>CO</span>

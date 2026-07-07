@@ -304,16 +304,17 @@ export default function Projects() {
           <h2 style={{
             fontFamily: SANS,
             fontWeight: 900,
-            fontSize: "clamp(36px, 8vw, 110px)",
+            fontSize: "clamp(42px, 13vw, 195px)",
             color: BONE,
             letterSpacing: "-0.06em",
-            lineHeight: 0.95,
+            lineHeight: 0.9,
             margin: 0,
+            paddingRight: "0.08em",
           }}>
             PRO
             <span style={{
               WebkitTextFillColor: "transparent",
-              WebkitTextStroke: "2px rgba(252,252,252,0.18)",
+              WebkitTextStroke: `1.5px ${BONE}`,
             }}>JECTS</span>
           </h2>
         </div>
