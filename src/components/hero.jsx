@@ -184,8 +184,14 @@ function HeadlineStack() {
       <div className="overflow-hidden">
         <motion.p
           variants={clipUp} initial="hidden" animate="visible" custom={1.2}
-          className="font-serif italic font-normal text-ash leading-none"
-          style={{ fontSize: "clamp(20px, 3.2vw, 42px)", letterSpacing: "-0.02em", paddingLeft: "0.15em" }}
+          className="font-serif italic font-normal text-ash"
+          style={{
+            fontSize: "clamp(20px, 3.2vw, 42px)",
+            letterSpacing: "-0.02em",
+            paddingLeft: "0.15em",
+            paddingBottom: "0.18em",
+            lineHeight: 1.1,
+          }}
         >
           engineering
         </motion.p>
@@ -284,31 +290,21 @@ export default function Hero() {
       </div>
 
       {/* ── DESKTOP layout (≥ 640px): absolute positioned, original feel ── */}
-      <div className="hidden sm:block">
+      <div className="hidden sm:block hero-desktop-wrapper">
         {/* headline — left, stops before photo column */}
-        <div
-          className="absolute z-10 px-6 md:px-8"
-          style={{ top: "14%", left: 0, right: "clamp(160px, 26vw, 400px)" }}
-        >
+        <div className="hero-headline-container">
           <HeadlineStack />
         </div>
 
         {/* photo — right column */}
-        <div
-          className="absolute z-20"
-          style={{
-            top: "clamp(80px, 10vw, 140px)",
-            right: "clamp(16px, 4vw, 140px)",
-            width: "clamp(130px, 20vw, 280px)",
-          }}
-        >
+        <div className="hero-photo-container">
           <PhotoBlock custom={2.2} showBasedIn={true} />
         </div>
 
         {/* bottom-left: availability */}
         <motion.div
           variants={fadeIn} initial="hidden" animate="visible" custom={3.2}
-          className="absolute bottom-10 left-8 z-20 flex flex-col gap-[6px]"
+          className="hero-avail-container"
         >
           <p className="font-mono text-[10px] tracking-[0.18em] text-dim">{AVAIL_TAG}</p>
           <a href="mailto:akhildwivedi453@gmail.com"
@@ -320,7 +316,7 @@ export default function Hero() {
         {/* bottom-right: recent role */}
         <motion.div
           variants={fadeIn} initial="hidden" animate="visible" custom={3.4}
-          className="absolute bottom-10 right-8 z-20 flex flex-col gap-[6px] text-right"
+          className="hero-recent-container"
         >
           <p className="font-mono text-[10px] tracking-[0.18em] text-dim">{RECENT_TAG}  ↘</p>
           <p className="font-mono text-[12px] tracking-[0.04em] text-bone font-bold">{RECENT_VAL}</p>

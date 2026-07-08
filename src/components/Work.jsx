@@ -496,10 +496,10 @@ export default function Work() {
 
           {/* INTERNSHIP — outline */}
           <h2
+            className="internship-title"
             style={{
               fontFamily: SANS,
               fontWeight: 900,
-              fontSize: "clamp(56px, 10vw, 130px)",
               lineHeight: 0.95,
               letterSpacing: "-0.05em",
               margin: 0,
