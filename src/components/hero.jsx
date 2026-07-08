@@ -254,28 +254,26 @@ export default function Hero() {
     <section id="hero" className="relative w-full min-h-screen select-none bg-void overflow-hidden">
 
       {/* ── MOBILE layout (< 640px) ── */}
-      <div className="flex sm:hidden flex-col px-4 pb-8 min-h-screen" style={{ paddingTop: "72px" }}>
+      <div className="flex sm:hidden flex-col px-4 pb-8 min-h-screen justify-between" style={{ paddingTop: "72px" }}>
 
-        {/* headline + photo side by side */}
-        <div className="flex items-start gap-3 mt-6">
-          {/* headline — takes remaining width */}
-          <div className="flex-1 min-w-0">
+        <div className="flex flex-col gap-6 mt-4">
+          {/* headline */}
+          <div className="w-full">
             <HeadlineStack />
           </div>
 
-          {/* photo — fixed narrow column on the right */}
-          <div className="flex-shrink-0" style={{ width: "28vw", maxWidth: "120px" }}>
-            <PhotoBlock custom={2.2} showBasedIn={false} />
+          {/* photo — centered below the heading */}
+          <div className="w-full flex justify-center">
+            <div className="w-[65vw] max-w-[240px]">
+              <PhotoBlock custom={2.2} showBasedIn={true} />
+            </div>
           </div>
         </div>
-
-        {/* spacer */}
-        <div className="flex-1" />
 
         {/* availability */}
         <motion.div
           variants={fadeIn} initial="hidden" animate="visible" custom={3.2}
-          className="flex flex-col gap-[6px] pb-2"
+          className="flex flex-col gap-[6px] mt-8 text-center"
         >
           <p className="font-mono text-[9px] tracking-[0.18em] text-dim">{AVAIL_TAG}</p>
           <a href="mailto:akhildwivedi453@gmail.com"
