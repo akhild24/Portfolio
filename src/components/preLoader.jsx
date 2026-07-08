@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import * as THREE from "three";
 
 const RIBBON_WORDS = ["DEVOPS", "AWS", "SECURITY", "BACKEND", "AI"];
 
@@ -7,18 +8,9 @@ export default function Preloader({ onComplete }) {
   const mountRef = useRef(null);
   const [percent, setPercent] = useState(0);
   const [visible, setVisible] = useState(true);
-  const [THREE, setTHREE] = useState(null);
-
-  // Dynamically load Three.js in the background
-  useEffect(() => {
-    import("three").then((module) => {
-      setTHREE(module);
-    });
-  }, []);
 
   // ── Three.js scene ──────────────────────────────────────────────────────────
   useEffect(() => {
-    if (!THREE) return;
     const mount = mountRef.current;
     if (!mount) return;
 
@@ -177,7 +169,7 @@ export default function Preloader({ onComplete }) {
       ribbonMat.dispose();
       texture.dispose();
     };
-  }, [THREE]);
+  }, []);
 
   // ── Percent counter ────────────────────────────────────────────────────────
   useEffect(() => {
