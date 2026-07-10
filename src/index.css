@@ -194,8 +194,9 @@ html, body {
    When the viewport is narrow (tablet) OR has a tall/vertical aspect ratio 
    (i.e. significant space below the heading, causing vertical negative space),
    we stack the layout symmetrically.
+   We restrict this to viewports >= 640px to prevent overriding mobile hidden utilities.
 */
-@media (max-width: 768px), (max-aspect-ratio: 1.2/1) {
+@media (min-width: 640px) and (max-width: 768px), (min-width: 640px) and (max-aspect-ratio: 1.2/1) {
   .hero-desktop-wrapper {
     display: flex !important;
     flex-direction: column !important;
@@ -239,7 +240,7 @@ html, body {
 }
 
 /* Ensure bottom absolute elements do not overlap photo on shorter, vertically-stacked viewports */
-@media (max-height: 850px) and (max-width: 768px), (max-height: 850px) and (max-aspect-ratio: 1.2/1) {
+@media (min-width: 640px) and (max-height: 850px) and (max-width: 768px), (min-width: 640px) and (max-height: 850px) and (max-aspect-ratio: 1.2/1) {
   .hero-desktop-wrapper {
     padding-bottom: 180px !important;
   }
